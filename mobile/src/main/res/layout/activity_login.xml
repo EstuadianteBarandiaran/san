@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/loginLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp"
+    android:background="#FDFAF6"
+    tools:context=".Login">
+
+    <!-- Círculos decorativos -->
+
+    <!-- Esquina superior izquierda -->
+    <View
+        android:id="@+id/circleTopLeft1"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="-30dp"
+        android:layout_marginTop="-30dp"
+        android:background="@drawable/circle_decor_primary" />
+
+    <View
+        android:id="@+id/circleTopLeft2"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="-50dp"
+        android:background="@drawable/circle_decor_secondary" />
+
+    <!-- Esquina inferior derecha -->
+    <View
+        android:id="@+id/circleBottomRight1"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="-20dp"
+        android:layout_marginEnd="-20dp"
+        android:background="@drawable/circle_decor_primary" />
+
+    <View
+        android:id="@+id/circleBottomRight2"
+        android:layout_width="304dp"
+        android:layout_height="304dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="-100dp"
+        android:layout_marginEnd="-10dp"
+        android:background="@drawable/circle_decor_secondary" />
+
+    <!-- Texto Login -->
+    <TextView
+        android:id="@+id/tvLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/quicksand"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
+        android:textColor="#000000" />
+
+    <!-- Contenedor Rectángulo -->
+    <RelativeLayout
+        android:id="@+id/container"
+        android:layout_width="355dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvLogin"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="75dp"
+        android:background="@drawable/bg_rounded_right"
+        android:padding="24dp">
+
+        <!-- Campos de correo y contraseña -->
+        <LinearLayout
+            android:id="@+id/fieldsContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="3dp">
+
+            <!-- Campo de correo -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="20dp">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="8dp"
+                    android:src="@android:drawable/ic_dialog_email" />
+
+                <EditText
+                    android:id="@+id/etEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:hint="Correo electrónico"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/quicksand"
+                    android:inputType="textEmailAddress" />
+            </LinearLayout>
+
+            <!-- Campo de contraseña -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="8dp"
+                    android:src="@android:drawable/ic_lock_idle_lock" />
+
+                <EditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:hint="Contraseña"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/quicksand"
+                    android:inputType="textPassword" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <!-- Botón circular encima del contenedor y sobresalido a la derecha -->
+    <ImageButton
+        android:id="@+id/btnCircle"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignTop="@id/container"
+        android:layout_alignEnd="@id/container"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="-30dp"
+        android:background="@drawable/circle_button"
+        android:contentDescription="Regresar"
+        android:src="@drawable/ic_arrow_back_white_24"
+        />
+
+    <!-- Botón de texto: ¿Olvidaste la contraseña? -->
+    <Button
+
+        android:id="@+id/btnForgotPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="¿Olvidaste la contraseña?"
+        android:fontFamily="@font/quicksand"
+        android:background="@android:color/transparent"
+        android:textColor="#000000"
+        android:layout_below="@id/container"
+        android:layout_marginTop="12dp"
+        android:layout_centerHorizontal="true" />
+
+    <!-- Botón de Registro -->
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="61dp"
+        android:layout_below="@id/btnForgotPassword"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="#88996A"
+        android:text="Registar"
+        android:textStyle="bold"
+        android:fontFamily="@font/quicksand"
+        android:textColor="#FFFFFF" />
+
+</RelativeLayout>
