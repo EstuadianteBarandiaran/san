@@ -45,22 +45,7 @@ class RegistroPersonal : AppCompatActivity() {
             }
 
             val uid = authViewModel.currentUser.value?.uid ?: "sin_uid"
-
-            val user = User(
-                uidUser = uid,
-                Nombre = name,
-                Edad = age,
-                Estatura = height.toDouble(),
-                Peso = weight.toInt(),
-                CantidadComida = meals,
-                CantidadLitros = waterLiters.toDouble()
-            )
-
             val datos = PesoEstatura(peso = weight, estatura = height)
-
-            authViewModel.saveUser(user) { mensaje ->
-                Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
-            }
 
             authViewModel.checkIfUserDataExists(uid) { existe ->
                 if (existe) {
@@ -71,8 +56,25 @@ class RegistroPersonal : AppCompatActivity() {
                         ) {
                             if (response.isSuccessful) {
                                 val resultado = response.body()
-                                val imcEstimado = resultado?.imc_estimado ?: 0f
-                                Toast.makeText(this@RegistroPersonal, "IMC estimado: $imcEstimado", Toast.LENGTH_LONG).show()
+                                val imc = String.format("%.2f", resultado?.imc_estimado ?: 0f).toFloat()
+
+                                val user = User(
+                                    uidUser = uid,
+                                    Nombre = name,
+                                    Edad = age,
+                                    Estatura = height.toDouble(),
+                                    Peso = weight.toInt(),
+                                    CantidadComida = meals,
+                                    CantidadLitros = waterLiters.toDouble(),
+                                    IMC = imc.toDouble()
+                                )
+
+                                authViewModel.saveUser(user) { mensaje ->
+                                    Toast.makeText(this@RegistroPersonal, mensaje, Toast.LENGTH_SHORT).show()
+                                }
+
+                                Toast.makeText(this@RegistroPersonal, "IMC estimado: $imc", Toast.LENGTH_LONG).show()
+
 
                                 val intent = Intent(this@RegistroPersonal, Home::class.java)
                                 startActivity(intent)

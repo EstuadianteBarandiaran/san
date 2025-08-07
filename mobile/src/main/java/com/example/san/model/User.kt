@@ -7,5 +7,6 @@ data class User(
     val Estatura:Double=0.0,
     val Peso: Int = 0,
     val CantidadComida: Int = 0,
-    val CantidadLitros: Double = 0.0
+    val CantidadLitros: Double = 0.0,
+    val IMC:Double=0.0
 )
