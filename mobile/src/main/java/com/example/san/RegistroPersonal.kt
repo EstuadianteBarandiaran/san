@@ -48,7 +48,7 @@ class RegistroPersonal : AppCompatActivity() {
             val datos = PesoEstatura(peso = weight, estatura = height)
 
             authViewModel.checkIfUserDataExists(uid) { existe ->
-                if (existe) {
+                if (!existe) {
                     RetrofitInstance.api.predecirIMC(datos).enqueue(object : retrofit2.Callback<ResultadoIMC> {
                         override fun onResponse(
                             call: retrofit2.Call<ResultadoIMC>,
