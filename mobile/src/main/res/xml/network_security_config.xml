@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config xmlns:android="http://schemas.android.com/apk/res/android">
-    <base-config cleartextTrafficPermitted="true" />
+    <!-- Configuración base para todas las conexiones -->
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system" />
+            <certificates src="user" />
+        </trust-anchors>
+    </base-config>
+
+    <!-- Configuración específica para Wear OS si es necesaria -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">com.google.android.wearable</domain>
+        <domain includeSubdomains="true">your-custom-domain.com</domain>
+    </domain-config>
 </network-security-config>

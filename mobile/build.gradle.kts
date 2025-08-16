@@ -53,8 +53,7 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    // Dependencia del módulo Wearable
-    wearApp(project(":wear"))
+
 
     // Configuración y dependencias de Firebase
     implementation(platform("com.google.firebase:firebase-bom:33.15.0"))
@@ -79,6 +78,11 @@ dependencies {
     kapt("androidx.room:room-compiler:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    implementation("com.google.android.gms:play-services-wearable:18.1.0")
+    implementation("androidx.localbroadcastmanager:localbroadcastmanager:1.1.0")
+// Para versiones antiguas
+// Para AndroidX usa:
+    implementation("androidx.core:core-ktx:1.12.0")
 
 
 }

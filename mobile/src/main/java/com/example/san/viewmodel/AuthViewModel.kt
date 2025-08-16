@@ -38,33 +38,33 @@ class AuthViewModel : ViewModel() {
 
     // Estado público para observar si el usuario está registrado (solo lectura)
     val isUserRegistered: StateFlow<Boolean> = _isUserRegistered
-//FUNCIONES DE REGISTRO DE USUARIO
+    //FUNCIONES DE REGISTRO DE USUARIO
     // Función para registrar un usuario con email y contraseña
-fun registerUser(email: String, password: String) {
-    viewModelScope.launch {
-        try {
-            // Crea el usuario en Firebase Auth
-            auth.createUserWithEmailAndPassword(email, password).await()
+    fun registerUser(email: String, password: String) {
+        viewModelScope.launch {
+            try {
+                // Crea el usuario en Firebase Auth
+                auth.createUserWithEmailAndPassword(email, password).await()
 
-            // Envía el correo de verificación
-            auth.currentUser?.sendEmailVerification()?.addOnSuccessListener {
+                // Envía el correo de verificación
+                auth.currentUser?.sendEmailVerification()?.addOnSuccessListener {
 
-                Log.d(javaClass.simpleName, "Correo de verificación enviado")
-            }?.addOnFailureListener { e ->
-                Log.e(javaClass.simpleName, "Fallo al enviar correo de verificación: ${e.message}")
+                    Log.d(javaClass.simpleName, "Correo de verificación enviado")
+                }?.addOnFailureListener { e ->
+                    Log.e(javaClass.simpleName, "Fallo al enviar correo de verificación: ${e.message}")
+                }
+
+                // Actualiza el estado
+                _currentUser.value = auth.currentUser
+                _isUserRegistered.value = true
+                Log.d(javaClass.simpleName, "Usuario registrado correctamente")
+
+            } catch (e: Exception) {
+                _isUserRegistered.value = false
+                Log.e(javaClass.simpleName, "Error al registrar usuario: ${e.message}")
             }
-
-            // Actualiza el estado
-            _currentUser.value = auth.currentUser
-            _isUserRegistered.value = true
-            Log.d(javaClass.simpleName, "Usuario registrado correctamente")
-
-        } catch (e: Exception) {
-            _isUserRegistered.value = false
-            Log.e(javaClass.simpleName, "Error al registrar usuario: ${e.message}")
         }
     }
-}
 
 
     // Función para iniciar sesión con email y contraseña
@@ -141,5 +141,22 @@ fun registerUser(email: String, password: String) {
     fun clearAuthMessage() {
         _authMessage.value = null
     }
+    fun checkIMC(uid: String, onSuccessMessage: (String) -> Unit, onFailure: (Exception) -> Unit) {
+
+
+        db.collection("User").document(uid).get()
+            .addOnSuccessListener { document ->
+                if (document != null && document.exists()) {
+                    val imc = document.getString("IMC") ?: "IMC no encontrado"
+                    onSuccessMessage(imc)
+                } else {
+                    onSuccessMessage("Documento no existe")
+                }
+            }
+            .addOnFailureListener { exception ->
+                onFailure(exception)
+            }
+    }
+
 
 }

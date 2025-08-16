@@ -54,7 +54,7 @@ class Login : AppCompatActivity() {
                             val uid = firebaseUser.uid
                             authViewModel.checkIfUserDataExists(uid) { existe ->
                                 if (existe) {
-                                    startActivity(Intent(this@Login, ChatBienvenida::class.java))
+                                    startActivity(Intent(this@Login, Home::class.java))
                                     finish()
 
                                 } else {

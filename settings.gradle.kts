@@ -21,4 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "san"
 include(":mobile")
-include(":wear")
+include(":app", ":wear")
+

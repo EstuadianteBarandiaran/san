@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.san"
+    namespace ="com.example.san.presentation"
     compileSdk = 36
 
     defaultConfig {
@@ -55,4 +55,12 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     wearApp(project(":wear"))
+    implementation("com.google.android.gms:play-services-wearable:18.1.0")
+    implementation("androidx.localbroadcastmanager:localbroadcastmanager:1.1.0")
+    implementation("androidx.core:core-ktx:1.12.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.3")
+    implementation("androidx.compose.material3:material3:1.1.2")
+    implementation("androidx.compose.material:material-icons-extended:1.7.0")
 }

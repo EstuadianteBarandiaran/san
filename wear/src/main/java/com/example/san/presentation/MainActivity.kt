@@ -1,72 +1,168 @@
-/* While this template provides a good starting point for using Wear Compose, you can always
- * take a look at https://github.com/android/wear-os-samples/tree/main/ComposeStarter to find the
- * most up to date changes to the libraries and their usages.
- */
-
 package com.example.san.presentation
 
+import android.Manifest
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.wear.compose.material.MaterialTheme
-import androidx.wear.compose.material.Text
-import androidx.wear.compose.material.TimeText
-import androidx.wear.tooling.preview.devices.WearDevices
-import com.example.san.R
-import com.example.san.presentation.theme.SanTheme
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.lifecycleScope
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import com.example.san.presentation.network.WearCommunicationManager1
+import com.example.san.presentation.network.WearMessageListener
+import kotlinx.coroutines.launch
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import com.example.san.presentation.WearAppUI
+
+
 
 class MainActivity : ComponentActivity() {
+
+    private lateinit var wearManager: WearCommunicationManager1
+
+    private var imcValue by mutableStateOf<Double?>(null)
+    private var caloriesValue by mutableStateOf<Int?>(null)
+    private var isLoading by mutableStateOf(false)
+    private var errorMessage by mutableStateOf<String?>(null)
+    private var updateSuccess by mutableStateOf(false)
+
+    // ✅ Nuevo launcher para permisos
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (isGranted) {
+            Log.d("MainActivity", "✅ Permiso POST_NOTIFICATIONS concedido")
+        } else {
+            Log.e("MainActivity", "❌ Permiso POST_NOTIFICATIONS denegado")
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        installSplashScreen()
-
         super.onCreate(savedInstanceState)
+        crearCanalNotificaciones(applicationContext)
 
-        setTheme(android.R.style.Theme_DeviceDefault)
+
+        wearManager = WearCommunicationManager1(this, object : WearMessageListener {
+            override fun onMessageReceived(path: String, data: String) {
+                // Ya lo maneja WearDataReceiver
+            }
+
+            override fun onError(error: String) {
+                errorMessage = error
+            }
+        })
 
         setContent {
-            WearApp("Android")
+            WearAppUI(
+                context = this,
+                imcValue = imcValue,
+                caloriesValue = caloriesValue,
+                isLoading = isLoading,
+                errorMessage = errorMessage,
+                updateSuccess = updateSuccess,
+                onClearSuccess = { updateSuccess = false },
+                onClearError = { errorMessage = null },
+                onRequestIMC = { sendIMCRequest() },
+                onRequestCalories = { launchCaloriesActivity() }
+            )
+        }
+
+        solicitarPermisoNotificaciones()
+    }
+
+    private fun solicitarPermisoNotificaciones() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+                != android.content.pm.PackageManager.PERMISSION_GRANTED
+            ) {
+                requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+            }
         }
     }
-}
 
-@Composable
-fun WearApp(greetingName: String) {
-    SanTheme {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colors.background),
-            contentAlignment = Alignment.Center
-        ) {
-            TimeText()
-            Greeting(greetingName = greetingName)
+    private fun sendIMCRequest() {
+        isLoading = true
+        lifecycleScope.launch {
+            val success = wearManager.sendMessage("/request_imc", "")
+            isLoading = false
+            if (!success) errorMessage = "No se pudo solicitar el IMC"
         }
     }
-}
 
-@Composable
-fun Greeting(greetingName: String) {
-    Text(
-        modifier = Modifier.fillMaxWidth(),
-        textAlign = TextAlign.Center,
-        color = MaterialTheme.colors.primary,
-        text = stringResource(R.string.hello_world, greetingName)
-    )
-}
+    private val caloriesResultLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            val calories = result.data?.getIntExtra("CALORIES_RESULT", 0) ?: 0
+            lifecycleScope.launch {
+                val success = wearManager.sendMessage("/update_calories", calories.toString())
+                updateSuccess = success
+                if (!success) errorMessage = "No se pudo enviar las calorías"
+            }
+        }
+    }
 
-@Preview(device = WearDevices.SMALL_ROUND, showSystemUi = true)
-@Composable
-fun DefaultPreview() {
-    WearApp("Preview Android")
+    private fun launchCaloriesActivity() {
+        val intent = Intent(this, CaloriesActivity::class.java)
+        intent.putExtra("INITIAL_CALORIES", caloriesValue ?: 0)
+        caloriesResultLauncher.launch(intent)
+    }
+
+    private val receiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            val type = intent?.getStringExtra("type")
+            val value = intent?.getStringExtra("value")
+
+            when (type) {
+                "imc" -> {
+                    imcValue = value?.toDoubleOrNull()
+                    errorMessage = null
+                }
+                "calories" -> {
+                    caloriesValue = value?.toIntOrNull()
+                    errorMessage = null
+                }
+                "update_response" -> {
+                    updateSuccess = value == "success"
+                    errorMessage = null
+                }
+                "error" -> {
+                    errorMessage = value
+                }
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val filter = IntentFilter("WearMessage")
+        LocalBroadcastManager.getInstance(this).registerReceiver(receiver, filter)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver)
+    }
+    private fun crearCanalNotificaciones(context: Context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = "Alarmas"
+            val descriptionText = "Notificaciones de alarmas programadas"
+            val importance = android.app.NotificationManager.IMPORTANCE_HIGH
+            val channel = android.app.NotificationChannel("wear_alarm_channel", name, importance).apply {
+                description = descriptionText
+            }
+
+            val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as android.app.NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
 }
