@@ -16,6 +16,7 @@
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
 
 
@@ -81,6 +82,7 @@
         <activity android:name=".Login" android:exported="false" />
         <activity android:name=".Register" android:exported="false" />
         <activity android:name=".ChatbotActivity" android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".Nutricion" android:exported="false" />
 
         <activity android:name=".MainActivity" android:exported="true">
             <intent-filter>

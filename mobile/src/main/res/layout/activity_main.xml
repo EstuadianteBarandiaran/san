@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-
 
     <ImageView
         android:id="@+id/backgroundImage"
@@ -22,16 +20,27 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
         android:layout_marginStart="42dp"
         android:layout_marginTop="45dp"
         android:layout_marginEnd="50dp"
-        android:layout_marginBottom="639dp"
         android:backgroundTint="#365240"
         android:fontFamily="@font/quicksand"
         android:text="ChatBot"
         android:textStyle="bold" />
 
+    <Button
+        android:id="@+id/btnNutricion"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnchat"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#365240"
+        android:fontFamily="@font/quicksand"
+        android:text="Nutrición"
+        android:textStyle="bold" />
+
+    <!-- El resto de tus elementos permanecen igual -->
     <TextView
         android:id="@+id/miTexto"
         android:layout_width="wrap_content"
@@ -96,6 +105,5 @@
         android:backgroundTint="#365240"
         android:text="Inicia sesión"
         android:textStyle="bold"/>
-
 
 </RelativeLayout>

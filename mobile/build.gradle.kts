@@ -37,6 +37,13 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    aaptOptions {
+        noCompress.add("tflite")
+        noCompress.add("lite")
+    }
+    buildFeatures {
+        mlModelBinding = true
+    }
 }
 
 dependencies {
@@ -52,6 +59,9 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation(libs.tensorflow.lite)
+    implementation(libs.tensorflow.lite.support)
+    implementation(libs.tensorflow.lite.metadata)
 
 
 

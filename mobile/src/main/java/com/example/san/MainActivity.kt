@@ -8,6 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.san.network.WearDataService
 
+
 class MainActivity : AppCompatActivity() {
 
     private val PERMISSION_REQUEST_CODE = 1001
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         val btnLogin: Button = findViewById(R.id.btnlogin)
         val btnRegister: Button = findViewById(R.id.btnregister)
         val btnChat: Button = findViewById(R.id.btnchat)
+        val btnNutricion: Button = findViewById(R.id.btnNutricion)
 
         btnRegister.setOnClickListener {
             startActivity(Intent(this, Register::class.java))
@@ -34,6 +36,10 @@ class MainActivity : AppCompatActivity() {
 
         btnLogin.setOnClickListener {
             startActivity(Intent(this, Login::class.java))
+        }
+
+        btnNutricion.setOnClickListener {
+            startActivity(Intent(this, Nutricion::class.java))
         }
     }
 
