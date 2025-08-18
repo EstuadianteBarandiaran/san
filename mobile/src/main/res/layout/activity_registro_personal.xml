@@ -1,254 +1,169 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/loginLayout"
+    android:id="@+id/registerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="24dp"
     android:background="#FDFAF6"
     tools:context=".Register">
 
-    <!-- Círculos decorativos -->
+    <!-- Wave superior -->
+    <ImageView
+        android:id="@+id/waveTop"
+        android:layout_width="0dp"
+        android:layout_height="120dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/wave_top"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Esquina superior izquierda -->
-    <View
-        android:id="@+id/circleTopLeft1"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="-30dp"
-        android:layout_marginTop="-30dp"
-        android:background="@drawable/circle_decor_primary" />
+    <!-- Wave inferior -->
+    <ImageView
+        android:id="@+id/waveBottom"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/wave_bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <View
-        android:id="@+id/circleTopLeft2"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="-50dp"
-        android:background="@drawable/circle_decor_secondary" />
-
-    <!-- Esquina inferior derecha -->
-    <View
-        android:id="@+id/circleBottomRight1"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="-20dp"
-        android:layout_marginEnd="-20dp"
-        android:background="@drawable/circle_decor_primary" />
-
-    <View
-        android:id="@+id/circleBottomRight2"
-        android:layout_width="304dp"
-        android:layout_height="304dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="-100dp"
-        android:layout_marginEnd="-10dp"
-        android:background="@drawable/circle_decor_secondary" />
-
-    <!-- Texto Registro -->
+    <!-- Título -->
     <TextView
-        android:id="@+id/tvLogin"
+        android:id="@+id/tvRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Registro Personall"
-        android:textSize="28sp"
+        android:text="Registro Personal"
+        android:textSize="36sp"
         android:textStyle="bold"
         android:fontFamily="@font/quicksand"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="150dp"
-        android:textColor="#000000" />
+        android:textColor="#000000"
+        app:layout_constraintTop_toBottomOf="@id/waveTop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"
+        />
 
-    <!-- Contenedor Rectángulo -->
 
-    <!-- Botón circular encima del contenedor y sobresalido a la derecha -->
-
-    <!-- Botón de texto: ¿Ya tienes una cuenta? -->
-
-    <!-- Botón de Registro -->
-
-    <RelativeLayout
-        android:id="@+id/container"
-        android:layout_width="355dp"
+    <!-- Contenedor en CardView -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/containerCard"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tvLogin"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/bg_rounded_right"
-        android:padding="24dp">
+        app:cardCornerRadius="20dp"
+        app:cardElevation="8dp"
+        android:backgroundTint="#FFFFFF"
+        app:layout_constraintTop_toBottomOf="@id/tvRegister"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp">
 
-        <!-- Campos de correo y contraseña -->
         <LinearLayout
-            android:id="@+id/fieldsContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="20dp">
 
-            <!-- Campo de correo -->
-            <LinearLayout
+            <!-- Campo: Nombre -->
+            <EditText
+                android:id="@+id/etNombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:orientation="horizontal">
+                android:hint="Nombre"
+                android:inputType="textPersonName"
+                android:fontFamily="@font/quicksand"
+                android:textStyle="bold"
+                android:padding="12dp"
+                android:backgroundTint="#88996A" />
 
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="18dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="8dp"
-                    android:src="@android:drawable/ic_dialog_email" />
-
-                <EditText
-                    android:id="@+id/etNombre"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:fontFamily="@font/quicksand"
-                    android:hint="Nombre"
-                    android:inputType="textPersonName"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
+            <!-- Campo: Edad -->
+            <EditText
+                android:id="@+id/etEdad"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:orientation="horizontal">
+                android:hint="Edad"
+                android:inputType="number"
+                android:fontFamily="@font/quicksand"
+                android:textStyle="bold"
+                android:padding="12dp"
+                android:layout_marginTop="12dp"
+                android:backgroundTint="#88996A" />
 
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="18dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="8dp"
-                    android:src="@android:drawable/ic_dialog_email" />
-
-                <EditText
-                    android:id="@+id/etEdad"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:fontFamily="@font/quicksand"
-                    android:hint="Edad"
-                    android:inputType="number"
-                    android:textStyle="bold" />
-            </LinearLayout>
-            <LinearLayout
+            <!-- Campo: Estatura -->
+            <EditText
+                android:id="@+id/etEstatura"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:orientation="horizontal">
+                android:hint="Estatura (cm)"
+                android:inputType="numberDecimal"
+                android:fontFamily="@font/quicksand"
+                android:textStyle="bold"
+                android:padding="12dp"
+                android:layout_marginTop="12dp"
+                android:backgroundTint="#88996A" />
 
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="18dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="8dp"
-                    android:src="@android:drawable/ic_dialog_email" />
-
-                <EditText
-                    android:id="@+id/etEstatura"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:fontFamily="@font/quicksand"
-                    android:hint="Estatura en Centimetros"
-                    android:inputType="numberDecimal"
-                    android:textStyle="bold" />
-            </LinearLayout>
-            <LinearLayout
+            <!-- Campo: Peso -->
+            <EditText
+                android:id="@+id/etPeso"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:orientation="horizontal">
+                android:hint="Peso (kg)"
+                android:inputType="numberDecimal"
+                android:fontFamily="@font/quicksand"
+                android:textStyle="bold"
+                android:padding="12dp"
+                android:layout_marginTop="12dp"
+                android:backgroundTint="#88996A" />
 
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="18dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="8dp"
-                    android:src="@android:drawable/ic_dialog_email" />
-
-                <EditText
-                    android:id="@+id/etPeso"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:fontFamily="@font/quicksand"
-                    android:hint="Peso en kg"
-                    android:inputType="numberDecimal"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
+            <!-- Campo: Comidas -->
+            <EditText
+                android:id="@+id/etComidas"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:orientation="horizontal">
+                android:hint="Comidas al día"
+                android:inputType="number"
+                android:fontFamily="@font/quicksand"
+                android:textStyle="bold"
+                android:padding="12dp"
+                android:layout_marginTop="12dp"
+                android:backgroundTint="#88996A" />
 
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="18dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="8dp"
-                    android:src="@android:drawable/ic_dialog_email" />
-
-                <EditText
-                    android:id="@+id/etComidas"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:fontFamily="@font/quicksand"
-                    android:hint="Cantidad de comidas al dia"
-                    android:inputType="number"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
+            <!-- Campo: Agua -->
+            <EditText
+                android:id="@+id/etAgua"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="18dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="8dp"
-                    android:src="@android:drawable/ic_dialog_email" />
-
-                <EditText
-                    android:id="@+id/etAgua"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
-                    android:fontFamily="@font/quicksand"
-                    android:hint="Litros de agua por dia"
-                    android:inputType="numberDecimal"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-
+                android:hint="Litros de agua al día"
+                android:inputType="numberDecimal"
+                android:fontFamily="@font/quicksand"
+                android:textStyle="bold"
+                android:padding="12dp"
+                android:layout_marginTop="12dp"
+                android:backgroundTint="#88996A" />
         </LinearLayout>
-    </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 
+    <!-- Botón de Registro con estilo embebido -->
     <Button
-        android:id="@+id/btnRegister"
-        android:layout_width="131dp"
-        android:layout_height="63dp"
-        android:layout_below="@id/container"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="24dp"
+        android:id="@+id/btn_iniciar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp"
+        android:layout_marginTop="16dp"
         android:backgroundTint="#88996A"
+        android:elevation="6dp"
         android:fontFamily="@font/quicksand"
+        android:padding="16dp"
+        android:stateListAnimator="@null"
         android:text="Registrar"
         android:textColor="#FFFFFF"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:translationZ="6dp"
+        app:cornerRadius="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/containerCard" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

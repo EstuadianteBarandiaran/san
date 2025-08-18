@@ -8,14 +8,10 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import androidx.fragment.app.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.san.viewmodel.AuthViewModel
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
-import kotlin.toString
 
 
 class Register : AppCompatActivity() {
@@ -25,8 +21,8 @@ class Register : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_register)
-        val button: ImageButton = findViewById(R.id.btnCircle)
-        val btnl: Button = findViewById(R.id.btnRegister)
+        val button: Button = findViewById(R.id.btnCircle)
+        val btnl: Button = findViewById(R.id.btn_iniciar)
         val user=findViewById<EditText>(R.id.etEmail)
         val password=findViewById<EditText>(R.id.etPassword)
         val password1=findViewById<EditText>(R.id.etPassword1)
@@ -65,14 +61,14 @@ class Register : AppCompatActivity() {
             }
         }
         btnl.setOnClickListener {
-            val intent= Intent(this, Login::class.java)
+            val intent= Intent(this, MainActivity::class.java)
             startActivity(intent)
             }
         lifecycleScope.launchWhenStarted {
             authViewModel.isUserRegistered.collect { isRegistered ->
                 if (isRegistered) {
 
-                    val intent = Intent(this@Register, Login::class.java)
+                    val intent = Intent(this@Register, MainActivity::class.java)
                     startActivity(intent)
                     finish()
                 }else{

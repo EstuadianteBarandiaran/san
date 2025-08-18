@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitInstance {
     private val retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl("http://192.168.100.8:5000//")  // Cambia por la URL real de tu backend Flask
+            .baseUrl(" http://192.168.0.187:5000")  // Cambia por la URL real de tu backend Flask
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

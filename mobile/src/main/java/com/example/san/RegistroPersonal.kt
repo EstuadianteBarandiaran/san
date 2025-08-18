@@ -23,7 +23,7 @@ class RegistroPersonal : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_registro_personal)
 
-        val btn: Button = findViewById(R.id.btnRegister)
+        val btn: Button = findViewById(R.id.btn_iniciar)
         val edtName: EditText = findViewById(R.id.etNombre)
         val edtEdad: EditText = findViewById(R.id.etEdad)
         val edtAltura: EditText = findViewById(R.id.etEstatura)

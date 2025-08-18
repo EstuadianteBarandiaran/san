@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageButton
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -27,8 +26,8 @@ class Login : AppCompatActivity() {
 
 
 
-        val button: ImageButton = findViewById(R.id.btnCircle)
-        val btnl: Button = findViewById(R.id.btnRegister)
+        val button: Button = findViewById(R.id.btn_iniciar)
+        val btnl: Button = findViewById(R.id.btn_volver)
         val user = findViewById<EditText>(R.id.etEmail)
         val password = findViewById<EditText>(R.id.etPassword)
 
@@ -70,7 +69,7 @@ class Login : AppCompatActivity() {
 
         // Botón para ir al registro
         btnl.setOnClickListener {
-            val intent = Intent(this, Register::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
     }

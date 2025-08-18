@@ -1,9 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
+
+    <!-- Imagen de fondo -->
+
+    <!-- Contenido encima del fondo -->
 
     <ImageView
         android:id="@+id/backgroundImage"
@@ -13,42 +15,14 @@
         android:scaleType="centerCrop"
         android:src="@drawable/fondo_san" />
 
-    <Button
-        android:id="@+id/btnchat"
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="42dp"
-        android:layout_marginTop="45dp"
-        android:layout_marginEnd="50dp"
-        android:backgroundTint="#365240"
-        android:fontFamily="@font/quicksand"
-        android:text="ChatBot"
-        android:textStyle="bold" />
-
-    <Button
-        android:id="@+id/btnNutricion"
-        android:layout_width="320dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/btnchat"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="#365240"
-        android:fontFamily="@font/quicksand"
-        android:text="Nutrición"
-        android:textStyle="bold" />
-
-    <!-- El resto de tus elementos permanecen igual -->
     <TextView
         android:id="@+id/miTexto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="78dp"
-        android:layout_marginBottom="233dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginBottom="256dp"
         android:fontFamily="@font/quicksand"
         android:text="¡Bienvenido a SAN!"
         android:textColor="#1f251f"
@@ -61,10 +35,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="27dp"
-        android:layout_marginBottom="199dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginBottom="226dp"
         android:fontFamily="@font/quicksand"
         android:text="Hola, estamos aqui para ayudarte con tu alimentación"
+        android:textColor="#1f251f"
         android:textStyle="bold" />
 
     <TextView
@@ -74,9 +49,10 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="182dp"
-        android:layout_marginBottom="157dp"
+        android:layout_marginBottom="178dp"
         android:fontFamily="@font/quicksand"
         android:text="Elige:"
+        android:textColor="#1f251f"
         android:textSize="18dp"
         android:textStyle="bold" />
 
@@ -86,8 +62,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="48dp"
-        android:layout_marginBottom="93dp"
+        android:layout_marginEnd="54dp"
+        android:layout_marginBottom="120dp"
         android:backgroundTint="#365240"
         android:fontFamily="@font/quicksand"
         android:text="Crea una cuenta"
@@ -99,11 +75,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="43dp"
-        android:layout_marginBottom="32dp"
-        android:fontFamily="@font/quicksand"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="65dp"
         android:backgroundTint="#365240"
+        android:fontFamily="@font/quicksand"
         android:text="Inicia sesión"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
+
 
 </RelativeLayout>

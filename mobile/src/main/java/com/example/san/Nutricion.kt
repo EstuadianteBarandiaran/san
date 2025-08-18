@@ -81,7 +81,7 @@ class Nutricion: AppCompatActivity() {
         confidence = findViewById(R.id.confidence)
         caloriesText = findViewById(R.id.caloriesText)
         imageView = findViewById(R.id.imageView)
-        picture = findViewById(R.id.button)
+        picture = findViewById(R.id.btnregister)
 
         // Cargar modelo
         try {

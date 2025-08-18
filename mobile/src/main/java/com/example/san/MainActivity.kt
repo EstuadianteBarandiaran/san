@@ -23,24 +23,16 @@ class MainActivity : AppCompatActivity() {
 
         val btnLogin: Button = findViewById(R.id.btnlogin)
         val btnRegister: Button = findViewById(R.id.btnregister)
-        val btnChat: Button = findViewById(R.id.btnchat)
-        val btnNutricion: Button = findViewById(R.id.btnNutricion)
 
         btnRegister.setOnClickListener {
             startActivity(Intent(this, Register::class.java))
         }
 
-        btnChat.setOnClickListener {
-            startActivity(Intent(this, ChatBienvenida::class.java))
-        }
 
         btnLogin.setOnClickListener {
             startActivity(Intent(this, Login::class.java))
         }
 
-        btnNutricion.setOnClickListener {
-            startActivity(Intent(this, Nutricion::class.java))
-        }
     }
 
     private fun checkAndStartWearService() {

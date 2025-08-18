@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/loginLayout"
     android:layout_width="match_parent"
@@ -9,93 +11,99 @@
     tools:context=".Login">
 
     <!-- Círculos decorativos -->
-
     <!-- Esquina superior izquierda -->
+
     <View
         android:id="@+id/circleTopLeft1"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="-30dp"
+        android:layout_marginStart="244dp"
         android:layout_marginTop="-30dp"
-        android:background="@drawable/circle_decor_primary" />
+        android:background="@drawable/circle_decor_primary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Esquina inferior derecha -->
 
     <View
         android:id="@+id/circleTopLeft2"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="60dp"
+        android:layout_width="197dp"
+        android:layout_height="212dp"
+        android:layout_marginStart="116dp"
         android:layout_marginTop="-50dp"
-        android:background="@drawable/circle_decor_secondary" />
+        android:background="@drawable/circle_decor_secondary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Esquina inferior derecha -->
     <View
         android:id="@+id/circleBottomRight1"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
+        android:layout_width="191dp"
+        android:layout_height="178dp"
+        android:layout_marginEnd="212dp"
         android:layout_marginBottom="-20dp"
-        android:layout_marginEnd="-20dp"
-        android:background="@drawable/circle_decor_primary" />
+        android:background="@drawable/circle_decor_primary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+
+
+    <!-- Texto Login -->
+
+    <!-- Contenedor Rectángulo -->
+
+    <!-- Botón de texto: ¿Olvidaste la contraseña? -->
+
+    <!-- Botón de Registro -->
 
     <View
         android:id="@+id/circleBottomRight2"
-        android:layout_width="304dp"
-        android:layout_height="304dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
+        android:layout_width="261dp"
+        android:layout_height="240dp"
+        android:layout_marginEnd="96dp"
         android:layout_marginBottom="-100dp"
-        android:layout_marginEnd="-10dp"
-        android:background="@drawable/circle_decor_secondary" />
+        android:background="@drawable/circle_decor_secondary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Texto Login -->
-    <TextView
-        android:id="@+id/tvLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Login"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        android:fontFamily="@font/quicksand"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="150dp"
-        android:textColor="#000000" />
-
-    <!-- Contenedor Rectángulo -->
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container"
         android:layout_width="355dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvLogin"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="75dp"
+        android:layout_height="122dp"
+        android:layout_marginTop="60dp"
         android:background="@drawable/bg_rounded_right"
-        android:padding="24dp">
+        android:padding="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.875"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvLogin"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.9">
 
         <!-- Campos de correo y contraseña -->
         <LinearLayout
             android:id="@+id/fieldsContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
             android:orientation="vertical"
-            android:layout_marginTop="3dp">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <!-- Campo de correo -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="20dp">
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="8dp"
+                    android:tint="#88996A"
                     android:src="@android:drawable/ic_dialog_email" />
 
                 <EditText
@@ -103,10 +111,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
-                    android:hint="Correo electrónico"
-                    android:textStyle="bold"
                     android:fontFamily="@font/quicksand"
-                    android:inputType="textEmailAddress" />
+                    android:hint="Correo electrónico"
+                    android:inputType="textEmailAddress"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <!-- Campo de contraseña -->
@@ -120,6 +128,7 @@
                     android:layout_height="24dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="8dp"
+                    android:tint="#88996A"
                     android:src="@android:drawable/ic_lock_idle_lock" />
 
                 <EditText
@@ -127,54 +136,75 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
-                    android:hint="Contraseña"
-                    android:textStyle="bold"
                     android:fontFamily="@font/quicksand"
-                    android:inputType="textPassword" />
+                    android:hint="Contraseña"
+                    android:inputType="textPassword"
+                    android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- Botón circular encima del contenedor y sobresalido a la derecha -->
-    <ImageButton
-        android:id="@+id/btnCircle"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_alignTop="@id/container"
-        android:layout_alignEnd="@id/container"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="-30dp"
-        android:background="@drawable/circle_button"
-        android:contentDescription="Regresar"
-        android:src="@drawable/ic_arrow_back_white_24"
-        />
+    <TextView
+        android:id="@+id/tvLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="192dp"
+        android:fontFamily="@font/quicksand"
+        android:text="Login"
+        android:textColor="#000000"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Botón de texto: ¿Olvidaste la contraseña? -->
     <Button
-
         android:id="@+id/btnForgotPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="¿Olvidaste la contraseña?"
-        android:fontFamily="@font/quicksand"
+        android:layout_marginTop="16dp"
         android:background="@android:color/transparent"
-        android:textColor="#000000"
-        android:layout_below="@id/container"
-        android:layout_marginTop="12dp"
-        android:layout_centerHorizontal="true" />
-
-    <!-- Botón de Registro -->
-    <Button
-        android:id="@+id/btnRegister"
-        android:layout_width="wrap_content"
-        android:layout_height="61dp"
-        android:layout_below="@id/btnForgotPassword"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="24dp"
-        android:backgroundTint="#88996A"
-        android:text="Registar"
-        android:textStyle="bold"
         android:fontFamily="@font/quicksand"
-        android:textColor="#FFFFFF" />
+        android:text="¿Olvidaste tu contraseña?"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/container" />
 
-</RelativeLayout>
+    <Button
+        android:id="@+id/btn_iniciar"
+        android:layout_width="238dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="28dp"
+        android:backgroundTint="#88996A"
+        android:fontFamily="@font/quicksand"
+        android:text="Iniciar sesión"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnForgotPassword"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.8" />
+
+    <Button
+        android:id="@+id/btn_volver"
+        android:layout_width="116dp"
+        android:layout_height="47dp"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/quicksand"
+        android:text="Volver"
+        android:textColor="#142d2a"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.025" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

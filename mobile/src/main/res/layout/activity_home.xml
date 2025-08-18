@@ -2,72 +2,203 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F5F9F4"
     tools:context=".Home">
 
-    <ImageView
-        android:id="@+id/backgroundImage"
+    <!-- Mensaje Bienvenido -->
+    <TextView
+        android:id="@+id/welcomeMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="¡Bienvenido!"
+        android:textColor="#2d3f46"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/quicksand"
+        android:gravity="center"
+        android:padding="16dp"
+        android:layout_marginTop="30dp"/>
+
+    <!-- App Bar Superior -->
+    <LinearLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#FFFFFF"
+        android:elevation="4dp"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:gravity="center_vertical"
+        android:layout_below="@id/welcomeMessage">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ideas de comidas: Plan Semanal"
+            android:textColor="#2d3f46"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/quicksand"/>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"/>
+
+        <ImageButton
+            android:id="@+id/btnCalendar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@android:drawable/ic_menu_my_calendar"
+            android:tint="#88996A"/>
+    </LinearLayout>
+
+    <!-- Selector de día -->
+    <HorizontalScrollView
+        android:id="@+id/daySelectorContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/appBar"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="16dp"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:id="@+id/daySelector"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <!-- Los días se agregarán programáticamente -->
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <!-- Contenido Principal con RecyclerView para las recetas -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recetasRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:contentDescription="Fondo de pantalla"
-        android:scaleType="centerCrop"
-        android:src="@drawable/fondo_san" />
+        android:layout_above="@id/bottomNavigation"
+        android:layout_below="@id/daySelectorContainer"
+        android:layout_marginTop="8dp"
+        android:padding="8dp"
+        android:clipToPadding="false"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
-    <TextView
-        android:id="@+id/miTexto"
-        android:layout_width="wrap_content"
+    <!-- Barra de Navegación Inferior MANUAL -->
+    <LinearLayout
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="27dp"
-        android:layout_marginBottom="222dp"
-        android:fontFamily="@font/quicksand"
-        android:text="¡Bienvenido a SAN Home Page!"
-        android:textColor="#1f251f"
-        android:textSize="30sp"
-        android:textStyle="bold" />
+        android:background="#88996A"
+        android:orientation="horizontal"
+        android:paddingVertical="12dp">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="27dp"
-        android:layout_marginBottom="199dp"
-        android:fontFamily="@font/quicksand"
-        android:text="Hola, estamos aqui para ayudarte con tu alimentación"
-        android:textStyle="bold" />
+        <!-- Ícono Inicio (Casa) -->
+        <LinearLayout
+            android:id="@+id/homeButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btnLogOut"
-        android:layout_width="313dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="52dp"
-        android:layout_marginBottom="118dp"
-        android:backgroundTint="#365240"
-        android:fontFamily="@font/quicksand"
-        android:text="Cerrar Sesion"
-        android:textStyle="bold" />
+            <ImageButton
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_home"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:tint="#FFFFFF"/>
 
-    <Button
-        android:id="@+id/btnSyncAlarmas"
-        android:layout_width="313dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="60dp"
-        android:backgroundTint="#365240"
-        android:fontFamily="@font/quicksand"
-        android:text="Probar Alarma en 1 min"
-        android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Inicio"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"
+                android:fontFamily="@font/quicksand"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
 
+        <!-- Ícono Plan (Cámara) -->
+        <LinearLayout
+            android:id="@+id/planButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
 
+            <ImageButton
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_camera"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:tint="#FFFFFF"/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Escaner"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"
+                android:fontFamily="@font/quicksand"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
 
+        <!-- Ícono Recetas (Chat) -->
+        <LinearLayout
+            android:id="@+id/recipesButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_chat"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:tint="#FFFFFF"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ChatBot"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"
+                android:fontFamily="@font/quicksand"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
+
+        <!-- Ícono Perfil (Persona/círculo) -->
+        <LinearLayout
+            android:id="@+id/profileButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_profile"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:tint="#FFFFFF"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Perfil"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"
+                android:fontFamily="@font/quicksand"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
+    </LinearLayout>
 </RelativeLayout>
