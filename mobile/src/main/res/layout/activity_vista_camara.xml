@@ -4,66 +4,107 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:background="#F5F9F4">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".MainActivity">
+        tools:context=".Nutricion">
 
-        <Button
-            android:id="@+id/btnregister"
+        <!-- Flecha de retroceso -->
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="26dp"
+            android:layout_marginTop="35dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_arrow_back"
+            android:tint="#2d3f46"
+            android:contentDescription="Volver atrás" />
+
+        <!-- Contenedor principal -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="20dp"
-            android:text="Tomar Foto"
-            android:textAllCaps="false"
-            android:textSize="21sp"
-            android:textStyle="bold" />
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
+            android:paddingHorizontal="24dp"
+            android:layout_below="@id/btnBack">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:scaleType="centerCrop" />
+            <!-- Nuevo TextView de bienvenida -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="24dp"
+                android:text="¡Hola!, escanea tus alimentos y descubre sus calorías"
+                android:textAlignment="center"
+                android:textColor="#142d2a"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/quicksand"
+                android:lineSpacingExtra="4sp"/>
 
-        <TextView
-            android:id="@+id/result"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/imageView"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:text=""
-            android:textColor="#C30000"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            <!-- Imagen y resto de elementos -->
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="330dp"
+                android:layout_height="330dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="24dp"
+                android:background="@drawable/bg_image_rounded"
+                android:scaleType="centerCrop"
+                android:elevation="4dp" />
 
-        <TextView
-            android:id="@+id/confidence"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/result"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:text=""
-            android:textColor="#000000"
-            android:textSize="16sp" />
+            <!-- Resto de tus elementos existentes... -->
+            <TextView
+                android:id="@+id/result"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/quicksand"
+                android:textColor="#2d3f46"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/caloriesText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/confidence"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
-            android:text=""
-            android:textColor="#009688"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            <TextView
+                android:id="@+id/confidence"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="24dp"
+                android:fontFamily="@font/quicksand"
+                android:textColor="#88996A"
+                android:textSize="16sp" />
 
+            <TextView
+                android:id="@+id/caloriesText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="32dp"
+                android:fontFamily="@font/quicksand"
+                android:textStyle="bold"
+                android:textColor="#009688"
+                android:textSize="22sp" />
+
+            <Button
+                android:id="@+id/btnregister"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/bg_button_rounded"
+                android:text="Tomar Foto"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/quicksand"
+                android:elevation="4dp"
+                style="@style/Widget.San.Button"/>
+        </LinearLayout>
     </RelativeLayout>
 </ScrollView>

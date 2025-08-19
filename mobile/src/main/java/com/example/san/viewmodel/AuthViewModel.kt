@@ -38,6 +38,10 @@ class AuthViewModel : ViewModel() {
 
     // Estado público para observar si el usuario está registrado (solo lectura)
     val isUserRegistered: StateFlow<Boolean> = _isUserRegistered
+
+    //Funcion para getr de perfil
+    private val _userData = MutableStateFlow<User?>(null)
+    val userData: StateFlow<User?> = _userData
     //FUNCIONES DE REGISTRO DE USUARIO
     // Función para registrar un usuario con email y contraseña
     fun registerUser(email: String, password: String) {
@@ -157,6 +161,45 @@ class AuthViewModel : ViewModel() {
                 onFailure(exception)
             }
     }
+    fun fetchUserData(uid: String) {
+        viewModelScope.launch {
+            try {
+                val document = db.collection("User").document(uid).get().await()
+                if (document.exists()) {
+                    val user = document.toObject(User::class.java)
+                    _userData.value = user
+                    Log.d("AuthViewModel", "Datos del usuario obtenidos")
+                } else {
+                    Log.d("AuthViewModel", "No se encontró el documento del usuario")
+                }
+            } catch (e: Exception) {
+                Log.e("AuthViewModel", "Error al obtener datos del usuario: ${e.message}")
+            }
+        }
+    }
+    fun fetchCaloriesHistory(uid: String, onResult: (List<Pair<String, Int>>) -> Unit) {
+        viewModelScope.launch {
+            try {
+                val snapshot = db.collection("User")
+                    .document(uid)
+                    .collection("Calories")
+                    .get()
+                    .await()
+
+                val history = snapshot.documents.mapNotNull { doc ->
+                    val date = doc.id
+                    val calories = doc.getLong("calories")?.toInt()
+                    if (calories != null) Pair(date, calories) else null
+                }.sortedByDescending { it.first }
+
+                onResult(history)
+            } catch (e: Exception) {
+                Log.e("AuthViewModel", "Error al obtener historial de calorías: ${e.message}")
+                onResult(emptyList())
+            }
+        }
+    }
+
 
 
 }

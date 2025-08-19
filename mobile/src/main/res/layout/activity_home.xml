@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F5F9F4"
+    android:fitsSystemWindows="true"
     tools:context=".Home">
 
     <!-- Mensaje Bienvenido -->
@@ -75,7 +76,7 @@
         </LinearLayout>
     </HorizontalScrollView>
 
-    <!-- Contenido Principal con RecyclerView para las recetas -->
+    <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recetasRecyclerView"
         android:layout_width="match_parent"
@@ -87,30 +88,34 @@
         android:clipToPadding="false"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
-    <!-- Barra de Navegación Inferior MANUAL -->
+    <!-- Barra de Navegación Inferior MEJORADA -->
     <LinearLayout
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="68dp"
         android:layout_alignParentBottom="true"
-        android:background="#88996A"
+        android:background="@drawable/bg_nav_bar"
         android:orientation="horizontal"
-        android:paddingVertical="12dp">
+        android:paddingTop="8dp"
+        android:layout_marginBottom="?attr/actionBarSize"
+        android:elevation="16dp">
 
-        <!-- Ícono Inicio (Casa) -->
+        <!-- Botón Inicio -->
         <LinearLayout
             android:id="@+id/homeButton"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless">
 
-            <ImageButton
+            <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_home"
-                android:background="?attr/selectableItemBackgroundBorderless"
                 android:tint="#FFFFFF"/>
 
             <TextView
@@ -123,20 +128,22 @@
                 android:layout_marginTop="4dp"/>
         </LinearLayout>
 
-        <!-- Ícono Plan (Cámara) -->
+        <!-- Botón Escáner -->
         <LinearLayout
             android:id="@+id/planButton"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless">
 
-            <ImageButton
+            <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_camera"
-                android:background="?attr/selectableItemBackgroundBorderless"
                 android:tint="#FFFFFF"/>
 
             <TextView
@@ -149,20 +156,22 @@
                 android:layout_marginTop="4dp"/>
         </LinearLayout>
 
-        <!-- Ícono Recetas (Chat) -->
+        <!-- Botón ChatBot -->
         <LinearLayout
             android:id="@+id/recipesButton"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless">
 
-            <ImageButton
+            <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_chat"
-                android:background="?attr/selectableItemBackgroundBorderless"
                 android:tint="#FFFFFF"/>
 
             <TextView
@@ -175,20 +184,22 @@
                 android:layout_marginTop="4dp"/>
         </LinearLayout>
 
-        <!-- Ícono Perfil (Persona/círculo) -->
+        <!-- Botón Perfil -->
         <LinearLayout
             android:id="@+id/profileButton"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless">
 
-            <ImageButton
+            <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_profile"
-                android:background="?attr/selectableItemBackgroundBorderless"
                 android:tint="#FFFFFF"/>
 
             <TextView

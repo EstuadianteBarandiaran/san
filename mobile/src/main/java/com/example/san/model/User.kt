@@ -2,11 +2,11 @@ package com.example.san.model
 
 data class User(
     val uidUser: String = "",
-    val Nombre: String = "",
-    val Edad: Int = 0,
-    val Estatura:Double=0.0,
-    val Peso: Int = 0,
-    val CantidadComida: Int = 0,
-    val CantidadLitros: Double = 0.0,
-    val IMC:Double=0.0
+    val nombre: String = "",
+    val edad: Int = 0,
+    val estatura: Double = 0.0,
+    val peso: Int = 0,
+    val cantidadComida: Int = 0,
+    val cantidadLitros: Double = 0.0,
+    val imc: Double = 0.0
 )

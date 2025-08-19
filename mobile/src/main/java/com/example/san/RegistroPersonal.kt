@@ -60,14 +60,15 @@ class RegistroPersonal : AppCompatActivity() {
 
                                 val user = User(
                                     uidUser = uid,
-                                    Nombre = name,
-                                    Edad = age,
-                                    Estatura = height.toDouble(),
-                                    Peso = weight.toInt(),
-                                    CantidadComida = meals,
-                                    CantidadLitros = waterLiters.toDouble(),
-                                    IMC = imc.toDouble()
+                                    nombre = name,
+                                    edad = age,
+                                    estatura = height.toDouble(),
+                                    peso = weight.toInt(),
+                                    cantidadComida = meals,
+                                    cantidadLitros = waterLiters.toDouble(),
+                                    imc = imc.toDouble()
                                 )
+
 
                                 authViewModel.saveUser(user) { mensaje ->
                                     Toast.makeText(this@RegistroPersonal, mensaje, Toast.LENGTH_SHORT).show()
