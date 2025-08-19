@@ -32,6 +32,7 @@ class Perfil : AppCompatActivity() {
         val tvComida = findViewById<TextView>(R.id.tvComida)
         val tvAgua = findViewById<TextView>(R.id.tvAgua)
         val btnCaloria = findViewById<Button>(R.id.btnCaloria)
+        val btnLogOut = findViewById<Button>(R.id.btnLogOut)
 
         val uid = FirebaseAuth.getInstance().currentUser?.uid
         Log.d("Perfil", "UID actual: $uid")
@@ -40,6 +41,23 @@ class Perfil : AppCompatActivity() {
             viewModel.fetchUserData(uid)
         } else {
             Log.e("Perfil", "Usuario no autenticado")
+        }
+
+        // Configurar el botón de cierre de sesión
+        btnLogOut.setOnClickListener {
+            viewModel.logOut()
+        }
+
+        // Observar cambios en el usuario
+        lifecycleScope.launchWhenStarted {
+            viewModel.currentUser.collect { user ->
+                if (user == null) {
+                    // Redirigir al MainActivity si el usuario cierra sesión
+                    val intent = Intent(this@Perfil, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+            }
         }
 
         lifecycleScope.launch {
@@ -53,7 +71,6 @@ class Perfil : AppCompatActivity() {
                     tvIMC.text = "IMC: ${user.imc}"
                     tvComida.text = "Comida diaria: ${user.cantidadComida} kcal"
                     tvAgua.text = "Agua diaria: ${user.cantidadLitros} L"
-
                 } else {
                     Log.e("Perfil", "No se encontraron datos del usuario")
                     tvNombre.text = "Nombre: -"

@@ -31,8 +31,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.San"
-        tools:targetApi="31"
-        android:usesPermission="android.permission.SCHEDULE_EXACT_ALARM">
+        tools:targetApi="31">
 
         <!-- 🧠 Meta-data para Wear OS -->
         <meta-data
@@ -82,6 +81,7 @@
         <activity android:name=".Register" android:exported="false" />
         <activity android:name=".ChatbotActivity" android:windowSoftInputMode="adjustResize" />
         <activity android:name=".Nutricion" android:exported="false" />
+        <activity android:name=".Perfil" android:exported="false" />
         <activity android:name=".MainActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
