@@ -2,21 +2,24 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.san">
-    <!-- Permisos requeridos (DEBEN ESTAR FUERA DE APPLICATION) -->
+
+    <!-- 🔐 Permisos globales -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
-    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
-    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-feature android:name="android.hardware.camera" android:required="false" />
+
+    <!-- 🔗 Bluetooth (Android 12+) -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
 
     <application
         android:allowBackup="true"
@@ -27,13 +30,19 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.San">
-        <activity
-            android:name=".HistorialCalorias"
-            android:exported="false" />
-        <activity
-            android:name=".Perfil"
-            android:exported="false" /> <!-- Servicio de comunicación con Wear OS -->
+        android:theme="@style/Theme.San"
+        tools:targetApi="31"
+        android:usesPermission="android.permission.SCHEDULE_EXACT_ALARM">
+
+        <!-- 🧠 Meta-data para Wear OS -->
+        <meta-data
+            android:name="com.google.android.wearable.foregroundService"
+            android:value="true" />
+        <meta-data
+            android:name="com.google.android.wearable.application"
+            android:resource="@xml/wearable_app_desc" />
+
+        <!-- 🔄 Servicios para comunicación Wear OS -->
         <service
             android:name=".network.WearDataService"
             android:enabled="true"
@@ -41,11 +50,7 @@
             android:foregroundServiceType="connectedDevice">
             <intent-filter>
                 <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED" />
-
-                <data
-                    android:host="*"
-                    android:pathPattern=".*"
-                    android:scheme="wear" />
+                <data android:scheme="wear" android:host="*" android:pathPattern=".*" />
             </intent-filter>
         </service>
 
@@ -55,54 +60,33 @@
             <intent-filter>
                 <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED" />
             </intent-filter>
-        </service> <!-- Receiver para inicio automático -->
+        </service>
+
+        <!-- 🔁 Receiver para reinicio automático -->
         <receiver
             android:name=".network.BootReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <!-- Para algunos fabricantes -->
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />
                 <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
             </intent-filter>
-        </receiver> <!-- Meta-data esencial para Wear OS -->
-        <meta-data
-            android:name="com.google.android.wearable.foregroundService"
-            android:value="true" />
-        <meta-data
-            android:name="com.google.android.wearable.application"
-            android:resource="@xml/wearable_app_desc" /> <!-- Tus actividades -->
-        <activity
-            android:name=".ChatBienvenida"
-            android:exported="false" />
-        <activity
-            android:name=".RegistroPersonal"
-            android:exported="false" />
-        <activity
-            android:name=".Home"
-            android:exported="false" />
-        <activity
-            android:name=".Login"
-            android:exported="false" />
-        <activity
-            android:name=".Register"
-            android:exported="false" />
-        <activity
-            android:name=".ChatbotActivity"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".Nutricion"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
+        </receiver>
+
+        <!-- 🧭 Actividades principales -->
+        <activity android:name=".ChatBienvenida" android:exported="false" />
+        <activity android:name=".RegistroPersonal" android:exported="false" />
+        <activity android:name=".Home" android:exported="false" />
+        <activity android:name=".Login" android:exported="false" />
+        <activity android:name=".Register" android:exported="false" />
+        <activity android:name=".ChatbotActivity" android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".Nutricion" android:exported="false" />
+        <activity android:name=".MainActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
-
 </manifest>

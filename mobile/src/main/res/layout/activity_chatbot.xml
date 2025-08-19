@@ -1,54 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="8dp"
+    android:background="#FFFFFF"
     android:fitsSystemWindows="true"
-    android:focusableInTouchMode="true"
-    android:background="#FFFFFF">
+    android:focusableInTouchMode="true">
 
+    <!-- Botón de retroceso (sobrepuesto) -->
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_arrow_back"
+        android:tint="#365240"
+        android:contentDescription="Volver atrás"
+        android:elevation="8dp"/>
 
-    <!-- RecyclerView para los mensajes del chat -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/chatRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@drawable/fondog"
-        android:layout_weight="1"
-        android:clipToPadding="false"
-        android:padding="8dp"
-        android:overScrollMode="never" />
-
-
-    <!-- Barra de entrada de mensaje -->
+    <!-- Contenedor principal (LinearLayout original) -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#F0F0F0"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
         android:padding="8dp">
 
-        <EditText
-            android:id="@+id/edtMensaje"
-            android:layout_width="0dp"
-            android:layout_height="77dp"
+        <!-- RecyclerView para los mensajes del chat -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/chatRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/fondog"
             android:layout_weight="1"
-            android:background="@drawable/rounded_edittext"
-            android:hint="Escribe un mensaje"
-            android:padding="12dp"
-            android:textSize="16sp" />
+            android:clipToPadding="false"
+            android:padding="8dp"
+            android:overScrollMode="never" />
 
-        <Button
-            android:id="@+id/btnEnviar"
-            android:layout_width="wrap_content"
+        <!-- Barra de entrada de mensaje -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:backgroundTint="#365240"
-            android:text="Enviar" />
+            android:background="#F0F0F0"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="8dp">
 
+            <EditText
+                android:id="@+id/edtMensaje"
+                android:layout_width="0dp"
+                android:layout_height="77dp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_edittext"
+                android:hint="Escribe un mensaje"
+                android:padding="12dp"
+                android:textSize="16sp" />
 
-
+            <Button
+                android:id="@+id/btnEnviar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:backgroundTint="#365240"
+                android:text="Enviar" />
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</RelativeLayout>

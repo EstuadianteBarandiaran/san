@@ -112,7 +112,7 @@ class Home : AppCompatActivity() {
 
         // Botón de Chatbot
         findViewById<LinearLayout>(R.id.recipesButton).setOnClickListener {
-            val intent = Intent(this@Home, Chatbot::class.java)
+            val intent = Intent(this@Home, ChatBienvenida::class.java)
             startActivity(intent)
         }
 
