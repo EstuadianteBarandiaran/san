@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -82,6 +83,12 @@ class Nutricion: AppCompatActivity() {
         caloriesText = findViewById(R.id.caloriesText)
         imageView = findViewById(R.id.imageView)
         picture = findViewById(R.id.btnregister)
+
+        // Botón de retroceso
+        val btnBack: ImageButton = findViewById(R.id.btnBack)
+        btnBack.setOnClickListener {
+            finish() // Simplemente cierra la actividad actual
+        }
 
         // Cargar modelo
         try {
@@ -162,14 +169,13 @@ class Nutricion: AppCompatActivity() {
                         displayName = displayNames[className] ?: className,
                         originalName = className,
                         confidence = confidences[i],
-                        classIndex = i  // Añadimos el índice para debug
+                        classIndex = i
                     ))
                 }
             }
             sortByDescending { it.confidence }
         }
 
-        // Debug: Mostrar confianzas completas
         Log.d("Classification", "Confianzas completas:")
         confidences.forEachIndexed { index, conf ->
             Log.d("Classification", "${modelClasses[index]}: ${"%.2f".format(conf)}")
@@ -218,7 +224,7 @@ class Nutricion: AppCompatActivity() {
         val displayName: String,
         val originalName: String,
         val confidence: Float,
-        val classIndex: Int = -1  // Para debug
+        val classIndex: Int = -1
     )
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

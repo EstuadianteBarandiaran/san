@@ -83,7 +83,6 @@
         <activity android:name=".Register" android:exported="false" />
         <activity android:name=".ChatbotActivity" android:windowSoftInputMode="adjustResize" />
         <activity android:name=".Nutricion" android:exported="false" />
-
         <activity android:name=".MainActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
