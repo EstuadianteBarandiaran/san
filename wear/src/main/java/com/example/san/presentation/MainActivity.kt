@@ -20,9 +20,6 @@ import kotlinx.coroutines.launch
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
-import com.example.san.presentation.WearAppUI
-
-
 
 class MainActivity : ComponentActivity() {
 
@@ -30,7 +27,8 @@ class MainActivity : ComponentActivity() {
 
     private var imcValue by mutableStateOf<Double?>(null)
     private var caloriesValue by mutableStateOf<Int?>(null)
-    private var isLoading by mutableStateOf(false)
+    private var isLoadingIMC by mutableStateOf(false) // Estado separado para IMC
+    private var isLoadingCalories by mutableStateOf(false) // Estado separado para calorías
     private var errorMessage by mutableStateOf<String?>(null)
     private var updateSuccess by mutableStateOf(false)
 
@@ -49,7 +47,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         crearCanalNotificaciones(applicationContext)
 
-
         wearManager = WearCommunicationManager1(this, object : WearMessageListener {
             override fun onMessageReceived(path: String, data: String) {
                 // Ya lo maneja WearDataReceiver
@@ -65,7 +62,8 @@ class MainActivity : ComponentActivity() {
                 context = this,
                 imcValue = imcValue,
                 caloriesValue = caloriesValue,
-                isLoading = isLoading,
+                isLoadingIMC = isLoadingIMC, // Pasar estado separado para IMC
+                isLoadingCalories = isLoadingCalories, // Pasar estado separado para calorías
                 errorMessage = errorMessage,
                 updateSuccess = updateSuccess,
                 onClearSuccess = { updateSuccess = false },
@@ -89,10 +87,11 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun sendIMCRequest() {
-        isLoading = true
+        isLoadingIMC = true // Solo activar carga para IMC
+        errorMessage = null
         lifecycleScope.launch {
             val success = wearManager.sendMessage("/request_imc", "")
-            isLoading = false
+            isLoadingIMC = false // Solo desactivar carga para IMC
             if (!success) errorMessage = "No se pudo solicitar el IMC"
         }
     }
@@ -102,8 +101,10 @@ class MainActivity : ComponentActivity() {
     ) { result ->
         if (result.resultCode == RESULT_OK) {
             val calories = result.data?.getIntExtra("CALORIES_RESULT", 0) ?: 0
+            isLoadingCalories = true // Activar carga para calorías
             lifecycleScope.launch {
                 val success = wearManager.sendMessage("/update_calories", calories.toString())
+                isLoadingCalories = false // Desactivar carga para calorías
                 updateSuccess = success
                 if (!success) errorMessage = "No se pudo enviar las calorías"
             }
@@ -124,18 +125,23 @@ class MainActivity : ComponentActivity() {
             when (type) {
                 "imc" -> {
                     imcValue = value?.toDoubleOrNull()
+                    isLoadingIMC = false // Asegurar que se desactive la carga cuando llegue la respuesta
                     errorMessage = null
                 }
                 "calories" -> {
                     caloriesValue = value?.toIntOrNull()
+                    isLoadingCalories = false // Asegurar que se desactive la carga cuando llegue la respuesta
                     errorMessage = null
                 }
                 "update_response" -> {
                     updateSuccess = value == "success"
+                    isLoadingCalories = false // Asegurar que se desactive la carga cuando llegue la respuesta
                     errorMessage = null
                 }
                 "error" -> {
                     errorMessage = value
+                    isLoadingIMC = false // Desactivar carga en caso de error
+                    isLoadingCalories = false // Desactivar carga en caso de error
                 }
             }
         }
@@ -151,6 +157,7 @@ class MainActivity : ComponentActivity() {
         super.onPause()
         LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver)
     }
+
     private fun crearCanalNotificaciones(context: Context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val name = "Alarmas"
@@ -164,5 +171,4 @@ class MainActivity : ComponentActivity() {
             notificationManager.createNotificationChannel(channel)
         }
     }
-
 }

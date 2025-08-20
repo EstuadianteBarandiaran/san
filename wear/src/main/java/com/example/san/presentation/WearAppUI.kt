@@ -24,7 +24,8 @@ fun WearAppUI(
     context: Context,
     imcValue: Double?,
     caloriesValue: Int?,
-    isLoading: Boolean,
+    isLoadingIMC: Boolean, // Estado separado para IMC
+    isLoadingCalories: Boolean, // Estado separado para calorías
     errorMessage: String?,
     updateSuccess: Boolean,
     onClearSuccess: () -> Unit,
@@ -32,7 +33,7 @@ fun WearAppUI(
     onRequestIMC: () -> Unit,
     onRequestCalories: () -> Unit
 ) {
-    // Paleta de colores de tu app
+    // Paleta de colores (mantener igual)
     val darkGreen = Color(0xFF142D2A)
     val mediumDarkGreen = Color(0xFF213B33)
     val mediumGreen = Color(0xFF365240)
@@ -57,7 +58,7 @@ fun WearAppUI(
             // Header
             Text(
                 text = "Mi Salud",
-                color = white,
+                color = white, // Cambiado para mejor visibilidad
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(bottom = 4.dp)
@@ -99,7 +100,7 @@ fun WearAppUI(
             // Botón IMC
             Button(
                 onClick = onRequestIMC,
-                enabled = !isLoading,
+                enabled = !isLoadingIMC && !isLoadingCalories, // Solo deshabilitar si alguna operación está en curso
                 modifier = Modifier.fillMaxWidth(),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = mediumGreen,
@@ -107,7 +108,7 @@ fun WearAppUI(
                 ),
                 shape = RoundedCornerShape(12.dp)
             ) {
-                if (isLoading) {
+                if (isLoadingIMC) {
                     CircularProgressIndicator(
                         modifier = Modifier.size(16.dp),
                         color = white,
@@ -130,6 +131,7 @@ fun WearAppUI(
             // Botón Calorías
             Button(
                 onClick = onRequestCalories,
+                enabled = !isLoadingIMC && !isLoadingCalories, // Solo deshabilitar si alguna operación está en curso
                 modifier = Modifier.fillMaxWidth(),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = lightGreen,
@@ -137,92 +139,108 @@ fun WearAppUI(
                 ),
                 shape = RoundedCornerShape(12.dp)
             ) {
-                Icon(
-                    imageVector = Icons.Default.Fastfood,
-                    contentDescription = "Calorías",
-                    modifier = Modifier.size(18.dp)
-                )
-                Spacer(modifier = Modifier.width(6.dp))
-                Text(
-                    text = "Ingresar Calorías",
-                    fontSize = 14.sp
-                )
+                if (isLoadingCalories) {
+                    CircularProgressIndicator(
+                        modifier = Modifier.size(16.dp),
+                        color = white,
+                        strokeWidth = 2.dp
+                    )
+                } else {
+                    Icon(
+                        imageVector = Icons.Default.Fastfood,
+                        contentDescription = "Calorías",
+                        modifier = Modifier.size(18.dp)
+                    )
+                    Spacer(modifier = Modifier.width(6.dp))
+                    Text(
+                        text = "Ingresar Calorías",
+                        fontSize = 14.sp
+                    )
+                }
             }
 
-            // Sección de resultados
-            if (imcValue != null || caloriesValue != null) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(mediumDarkGreen, RoundedCornerShape(16.dp))
-                        .padding(16.dp)
+            // Sección de resultados - MEJORADA
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(mediumDarkGreen, RoundedCornerShape(16.dp))
+                    .padding(16.dp)
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.spacedBy(12.dp)
-                    ) {
-                        imcValue?.let {
-                            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                Text(
-                                    text = "📊 IMC",
-                                    color = lightestGreen,
-                                    fontSize = 14.sp,
-                                    fontWeight = FontWeight.Bold
-                                )
-                                Text(
-                                    text = "%.1f".format(it),
-                                    color = white,
-                                    fontSize = 20.sp,
-                                    fontWeight = FontWeight.Bold
-                                )
-                                Text(
-                                    text = when {
-                                        it < 18.5 -> "Bajo peso"
-                                        it < 25 -> "Normal ✅"
-                                        it < 30 -> "Sobrepeso"
-                                        else -> "Obesidad"
-                                    },
-                                    color = when {
-                                        it < 18.5 -> Color(0xFFFFA726)
-                                        it < 25 -> lightestGreen
-                                        it < 30 -> Color(0xFFFF7043)
-                                        else -> Color(0xFFEF5350)
-                                    },
-                                    fontSize = 12.sp,
-                                    fontWeight = FontWeight.Medium
-                                )
-                            }
+                    if (imcValue != null) {
+                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                            Text(
+                                text = "📊 IMC",
+                                color = lightestGreen,
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+                            Text(
+                                text = "%.1f".format(imcValue),
+                                color = white,
+                                fontSize = 20.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+                            Text(
+                                text = when {
+                                    imcValue < 18.5 -> "Bajo peso"
+                                    imcValue < 25 -> "Normal ✅"
+                                    imcValue < 30 -> "Sobrepeso"
+                                    else -> "Obesidad"
+                                },
+                                color = when {
+                                    imcValue < 18.5 -> Color(0xFFFFA726)
+                                    imcValue < 25 -> lightestGreen
+                                    imcValue < 30 -> Color(0xFFFF7043)
+                                    else -> Color(0xFFEF5350)
+                                },
+                                fontSize = 12.sp,
+                                fontWeight = FontWeight.Medium
+                            )
                         }
+                    } else {
+                        Text(
+                            text = "Presiona 'Obtener IMC' para ver tu índice",
+                            color = lightestGreen.copy(alpha = 0.7f),
+                            fontSize = 10.sp,
+                            textAlign = TextAlign.Center
+                        )
+                    }
 
-                        caloriesValue?.let {
-                            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                Text(
-                                    text = "🔥 CALORÍAS",
-                                    color = lightestGreen,
-                                    fontSize = 14.sp,
-                                    fontWeight = FontWeight.Bold
-                                )
-                                Text(
-                                    text = "$it kcal",
-                                    color = white,
-                                    fontSize = 20.sp,
-                                    fontWeight = FontWeight.Bold
-                                )
-                            }
+                    if (caloriesValue != null) {
+                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                            Text(
+                                text = "🔥 CALORÍAS",
+                                color = lightestGreen,
+                                fontSize = 14.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+                            Text(
+                                text = "$caloriesValue kcal",
+                                color = white,
+                                fontSize = 20.sp,
+                                fontWeight = FontWeight.Bold
+                            )
                         }
+                    } else {
+                        Text(
+                            text = "Presiona 'Ingresar Calorías' para registrar",
+                            color = lightestGreen.copy(alpha = 0.7f),
+                            fontSize = 10.sp,
+                            textAlign = TextAlign.Center
+                        )
                     }
                 }
-            } else {
-                Text(
-                    text = "Presiona los botones para ver tus datos",
-                    color = lightestGreen,
-                    fontSize = 12.sp,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.padding(vertical = 16.dp)
-                )
             }
 
             errorMessage?.let {
+                LaunchedEffect(errorMessage) {
+                    kotlinx.coroutines.delay(5000)
+                    onClearError()
+                }
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
