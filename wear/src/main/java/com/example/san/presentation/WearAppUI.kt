@@ -57,7 +57,7 @@ fun WearAppUI(
             // Header
             Text(
                 text = "Mi Salud",
-                color = mediumDarkGreen,
+                color = lightestGreen, // Cambiado para mejor visibilidad
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(bottom = 4.dp)
@@ -96,6 +96,7 @@ fun WearAppUI(
                 }
             }
 
+            // SOLO DOS BOTONES - ELIMINADO CUALQUIER BOTÓN EXTRA
             // Botón IMC
             Button(
                 onClick = onRequestIMC,
@@ -130,6 +131,7 @@ fun WearAppUI(
             // Botón Calorías
             Button(
                 onClick = onRequestCalories,
+                enabled = !isLoading, // Agregado para deshabilitar durante carga
                 modifier = Modifier.fillMaxWidth(),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = lightGreen,
@@ -216,7 +218,7 @@ fun WearAppUI(
                 Text(
                     text = "Presiona los botones para ver tus datos",
                     color = lightestGreen,
-                    fontSize = 8.sp,
+                    fontSize = 10.sp,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.padding(vertical = 16.dp)
                 )
@@ -236,6 +238,10 @@ fun WearAppUI(
                         textAlign = TextAlign.Center,
                         modifier = Modifier.fillMaxWidth()
                     )
+                }
+                LaunchedEffect(it) {
+                    kotlinx.coroutines.delay(5000)
+                    onClearError()
                 }
             }
 
