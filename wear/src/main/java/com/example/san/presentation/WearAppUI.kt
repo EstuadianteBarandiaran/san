@@ -56,8 +56,8 @@ fun WearAppUI(
 
             // Header
             Text(
-                text = "Mi Salud",
-                color = lightestGreen, // Cambiado para mejor visibilidad
+                text = "💪 Mi Salud",
+                color = lightestGreen,
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(bottom = 4.dp)
@@ -96,7 +96,6 @@ fun WearAppUI(
                 }
             }
 
-            // SOLO DOS BOTONES - ELIMINADO CUALQUIER BOTÓN EXTRA
             // Botón IMC
             Button(
                 onClick = onRequestIMC,
@@ -122,7 +121,7 @@ fun WearAppUI(
                     )
                     Spacer(modifier = Modifier.width(6.dp))
                     Text(
-                        text = "Obtener IMC",
+                        "Obtener IMC",
                         fontSize = 14.sp
                     )
                 }
@@ -131,7 +130,6 @@ fun WearAppUI(
             // Botón Calorías
             Button(
                 onClick = onRequestCalories,
-                enabled = !isLoading, // Agregado para deshabilitar durante carga
                 modifier = Modifier.fillMaxWidth(),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = lightGreen,
@@ -146,10 +144,12 @@ fun WearAppUI(
                 )
                 Spacer(modifier = Modifier.width(6.dp))
                 Text(
-                    text = "Ingresar Calorías",
+                    "Ingresar Calorías",
                     fontSize = 14.sp
                 )
             }
+
+            Spacer(modifier = Modifier.height(16.dp))
 
             // Sección de resultados
             if (imcValue != null || caloriesValue != null) {
@@ -166,21 +166,15 @@ fun WearAppUI(
                         imcValue?.let {
                             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                                 Text(
-                                    text = "📊 IMC",
-                                    color = lightestGreen,
-                                    fontSize = 14.sp,
-                                    fontWeight = FontWeight.Bold
-                                )
-                                Text(
-                                    text = "%.1f".format(it),
+                                    text = "IMC: ${"%.2f".format(it)}",
                                     color = white,
-                                    fontSize = 20.sp,
+                                    fontSize = 16.sp,
                                     fontWeight = FontWeight.Bold
                                 )
                                 Text(
                                     text = when {
                                         it < 18.5 -> "Bajo peso"
-                                        it < 25 -> "Normal ✅"
+                                        it < 25 -> "Normal"
                                         it < 30 -> "Sobrepeso"
                                         else -> "Obesidad"
                                     },
@@ -190,27 +184,19 @@ fun WearAppUI(
                                         it < 30 -> Color(0xFFFF7043)
                                         else -> Color(0xFFEF5350)
                                     },
-                                    fontSize = 12.sp,
+                                    fontSize = 14.sp,
                                     fontWeight = FontWeight.Medium
                                 )
                             }
                         }
 
                         caloriesValue?.let {
-                            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                Text(
-                                    text = "🔥 CALORÍAS",
-                                    color = lightestGreen,
-                                    fontSize = 14.sp,
-                                    fontWeight = FontWeight.Bold
-                                )
-                                Text(
-                                    text = "$it kcal",
-                                    color = white,
-                                    fontSize = 20.sp,
-                                    fontWeight = FontWeight.Bold
-                                )
-                            }
+                            Text(
+                                text = "Calorías: $it kcal",
+                                color = white,
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Bold
+                            )
                         }
                     }
                 }
@@ -218,37 +204,24 @@ fun WearAppUI(
                 Text(
                     text = "Presiona los botones para ver tus datos",
                     color = lightestGreen,
-                    fontSize = 10.sp,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.padding(vertical = 16.dp)
+                    fontSize = 12.sp,
+                    textAlign = TextAlign.Center
                 )
             }
 
             errorMessage?.let {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(Color(0x44EF5350), RoundedCornerShape(8.dp))
-                        .padding(8.dp)
-                ) {
-                    Text(
-                        text = it,
-                        color = Color(0xFFEF5350),
-                        fontSize = 11.sp,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                }
-                LaunchedEffect(it) {
-                    kotlinx.coroutines.delay(5000)
-                    onClearError()
-                }
+                Text(
+                    text = it,
+                    color = Color(0xFFEF5350),
+                    fontSize = 12.sp,
+                    modifier = Modifier.padding(top = 8.dp)
+                )
             }
 
             // Footer
             Text(
                 text = "San App",
-                color = lightestGreen,
+                color = lightestGreen.copy(alpha = 0.7f),
                 fontSize = 10.sp,
                 modifier = Modifier.padding(top = 8.dp)
             )
