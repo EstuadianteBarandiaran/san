@@ -56,8 +56,8 @@ fun WearAppUI(
 
             // Header
             Text(
-                text = "💪 Mi Salud",
-                color = lightestGreen,
+                text = "Mi Salud",
+                color = mediumDarkGreen,
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.padding(bottom = 4.dp)
