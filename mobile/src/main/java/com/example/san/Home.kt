@@ -70,6 +70,35 @@ class Home : AppCompatActivity() {
 
     private fun obtenerRecetasDeEjemplo(): List<Receta> {
         return listOf(
+            // recetas neuvas
+            Receta(
+                tipoComida = "Desayuno",
+                titulo = "Tostadas integrales con aguacate",
+                descripcion = "Pan integral con aguacate, rebanadas de tomate y un toque de limón.",
+                calorias = "280 kcal",
+                imagenResId = R.drawable.tostadas
+            ),
+            Receta(
+                tipoComida = "Almuerzo",
+                titulo = "Salmón a la plancha",
+                descripcion = "Filete de salmón acompañado de vegetales al vapor.",
+                calorias = "500 kcal",
+                imagenResId = R.drawable.salmon
+            ),
+            Receta(
+                tipoComida = "Cena",
+                titulo = "Sopa de lentejas",
+                descripcion = "Sopa ligera de lentejas con zanahoria, apio y especias suaves.",
+                calorias = "300 kcal",
+                imagenResId = R.drawable.sopa
+            ),
+            Receta(
+                tipoComida = "Snack",
+                titulo = "Yogur griego con miel y frutos secos",
+                descripcion = "Yogur griego natural con miel orgánica, frutos secos y fresas.",
+                calorias = "220 kcal",
+                imagenResId = R.drawable.yogurt
+            ),
             Receta(
                 tipoComida = "Desayuno",
                 titulo = "Avena con frutas y nueces",

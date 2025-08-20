@@ -17,7 +17,7 @@
             android:id="@+id/btnBack"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_marginStart="26dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="35dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_arrow_back"
@@ -33,7 +33,7 @@
             android:paddingHorizontal="24dp"
             android:layout_below="@id/btnBack">
 
-            <!-- Nuevo TextView de bienvenida -->
+            <!-- Texto de bienvenida -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -41,13 +41,13 @@
                 android:layout_marginBottom="24dp"
                 android:text="¡Hola!, escanea tus alimentos y descubre sus calorías"
                 android:textAlignment="center"
-                android:textColor="#142d2a"
-                android:textSize="18sp"
+                android:textColor="#0c2900"
+                android:textSize="22sp"
                 android:textStyle="bold"
                 android:fontFamily="@font/quicksand"
                 android:lineSpacingExtra="4sp"/>
 
-            <!-- Imagen y resto de elementos -->
+            <!-- Imagen -->
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="330dp"
@@ -58,39 +58,49 @@
                 android:scaleType="centerCrop"
                 android:elevation="4dp" />
 
-            <!-- Resto de tus elementos existentes... -->
-            <TextView
-                android:id="@+id/result"
-                android:layout_width="wrap_content"
+            <!-- Contenedor de resultados -->
+            <LinearLayout
+                android:id="@+id/resultsContainer"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="8dp"
-                android:fontFamily="@font/quicksand"
-                android:textColor="#2d3f46"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:layout_marginBottom="32dp">
 
-            <TextView
-                android:id="@+id/confidence"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="24dp"
-                android:fontFamily="@font/quicksand"
-                android:textColor="#88996A"
-                android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/result"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/quicksand"
+                    android:textColor="#2d3f46"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="6dp"
+                    android:gravity="center"/>
 
-            <TextView
-                android:id="@+id/caloriesText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="32dp"
-                android:fontFamily="@font/quicksand"
-                android:textStyle="bold"
-                android:textColor="#009688"
-                android:textSize="22sp" />
+                <TextView
+                    android:id="@+id/confidence"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/quicksand"
+                    android:textStyle="bold"
+                    android:textColor="#4c6556"
+                    android:textSize="18sp"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center"/>
 
+                <TextView
+                    android:id="@+id/caloriesText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/quicksand"
+                    android:textStyle="bold"
+                    android:textColor="#0c2900"
+                    android:textSize="20sp"
+                    android:gravity="center"/>
+            </LinearLayout>
+
+            <!-- Botón -->
             <Button
                 android:id="@+id/btnregister"
                 android:layout_width="match_parent"

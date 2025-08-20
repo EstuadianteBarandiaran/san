@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">san</string>
+    <string name="calendar_icon">Ícono de calendario</string>
 </resources>

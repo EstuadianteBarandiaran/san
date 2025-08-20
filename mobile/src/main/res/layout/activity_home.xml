@@ -13,14 +13,14 @@
         android:id="@+id/welcomeMessage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="¡Bienvenido!"
-        android:textColor="#2d3f46"
+        android:text="¡Bienvenido a SAN!"
+        android:textColor="#0c2900"
         android:textSize="24sp"
         android:textStyle="bold"
         android:fontFamily="@font/quicksand"
         android:gravity="center"
         android:padding="16dp"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="17dp"/>
 
     <!-- App Bar Superior -->
     <LinearLayout
@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ideas de comidas: Plan Semanal"
-            android:textColor="#2d3f46"
+            android:textColor="#0c2900"
             android:textSize="20sp"
             android:textStyle="bold"
             android:fontFamily="@font/quicksand"/>
@@ -47,14 +47,15 @@
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_weight="1"/>
-
-        <ImageButton
-            android:id="@+id/btnCalendar"
+        <ImageView
+            android:id="@+id/calendarIcon"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@android:drawable/ic_menu_my_calendar"
-            android:tint="#88996A"/>
+            android:tint="#88996A"
+            android:contentDescription="@string/calendar_icon"
+            android:layout_gravity="center_vertical"/>
+
     </LinearLayout>
 
     <!-- Selector de día -->
