@@ -271,12 +271,24 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:backgroundTint="#738e7d"
+            android:fontFamily="@font/quicksand"
             android:text="Historial de calorías"
             android:textAllCaps="false"
-            android:textStyle="bold"
-            android:fontFamily="@font/quicksand"
             android:textColor="#ffffff"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textStyle="bold" />
+        <Button
+            android:id="@+id/btnAlarma"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="#738e7d"
+            android:fontFamily="@font/quicksand"
+            android:text="Alarmas"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
+            android:textSize="16sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <!-- Barra de Navegación Inferior -->

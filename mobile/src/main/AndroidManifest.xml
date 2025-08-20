@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.san">
-
     <!-- 🔐 Permisos globales -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -13,9 +12,10 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-feature android:name="android.hardware.camera" android:required="false" />
 
-    <!-- 🔗 Bluetooth (Android 12+) -->
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" /> <!-- 🔗 Bluetooth (Android 12+) -->
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
@@ -32,16 +32,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.San"
         tools:targetApi="31">
-
-        <!-- 🧠 Meta-data para Wear OS -->
+        <activity
+            android:name=".RegistroAlarmaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Alarmas"
+            android:exported="false" /> <!-- 🧠 Meta-data para Wear OS -->
         <meta-data
             android:name="com.google.android.wearable.foregroundService"
             android:value="true" />
         <meta-data
             android:name="com.google.android.wearable.application"
-            android:resource="@xml/wearable_app_desc" />
-
-        <!-- 🔄 Servicios para comunicación Wear OS -->
+            android:resource="@xml/wearable_app_desc" /> <!-- 🔄 Servicios para comunicación Wear OS -->
         <service
             android:name=".network.WearDataService"
             android:enabled="true"
@@ -49,19 +51,20 @@
             android:foregroundServiceType="connectedDevice">
             <intent-filter>
                 <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED" />
-                <data android:scheme="wear" android:host="*" android:pathPattern=".*" />
+
+                <data
+                    android:host="*"
+                    android:pathPattern=".*"
+                    android:scheme="wear" />
             </intent-filter>
         </service>
-
         <service
             android:name=".network.PhoneMessageReceiver"
             android:exported="true">
             <intent-filter>
                 <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED" />
             </intent-filter>
-        </service>
-
-        <!-- 🔁 Receiver para reinicio automático -->
+        </service> <!-- 🔁 Receiver para reinicio automático -->
         <receiver
             android:name=".network.BootReceiver"
             android:enabled="true"
@@ -71,22 +74,43 @@
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />
                 <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
             </intent-filter>
-        </receiver>
-
-        <!-- 🧭 Actividades principales -->
-        <activity android:name=".ChatBienvenida" android:exported="false" />
-        <activity android:name=".RegistroPersonal" android:exported="false" />
-        <activity android:name=".Home" android:exported="false" />
-        <activity android:name=".Login" android:exported="false" />
-        <activity android:name=".Register" android:exported="false" />
-        <activity android:name=".ChatbotActivity" android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".Nutricion" android:exported="false" />
-        <activity android:name=".Perfil" android:exported="false" />
-        <activity android:name=".MainActivity" android:exported="true">
+        </receiver> <!-- 🧭 Actividades principales -->
+        <activity
+            android:name=".HistorialCalorias"
+            android:exported="false" />
+        <activity
+            android:name=".ChatBienvenida"
+            android:exported="false" />
+        <activity
+            android:name=".RegistroPersonal"
+            android:exported="false" />
+        <activity
+            android:name=".Home"
+            android:exported="false" />
+        <activity
+            android:name=".Login"
+            android:exported="false" />
+        <activity
+            android:name=".Register"
+            android:exported="false" />
+        <activity
+            android:name=".ChatbotActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".Nutricion"
+            android:exported="false" />
+        <activity
+            android:name=".Perfil"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
+
 </manifest>

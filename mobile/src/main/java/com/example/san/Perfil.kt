@@ -35,6 +35,7 @@ class Perfil : AppCompatActivity() {
         val tvComida = findViewById<TextView>(R.id.tvComida)
         val tvAgua = findViewById<TextView>(R.id.tvAgua)
         val btnCaloria = findViewById<Button>(R.id.btnCaloria)
+        val btnAlarma = findViewById<Button>(R.id.btnAlarma)
         val btnLogOut = findViewById<ImageButton>(R.id.btnLogOut) // Cambiado a ImageButton
 
         val uid = FirebaseAuth.getInstance().currentUser?.uid
@@ -92,6 +93,9 @@ class Perfil : AppCompatActivity() {
 
         btnCaloria.setOnClickListener {
             startActivity(Intent(this, HistorialCalorias::class.java))
+        }
+        btnAlarma.setOnClickListener {
+            startActivity(Intent(this, Alarmas::class.java))
         }
     }
 

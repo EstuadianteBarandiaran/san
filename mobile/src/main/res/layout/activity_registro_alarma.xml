@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/loginLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp"
+    android:background="#FDFAF6"
+    tools:context=".Register">
+
+    <!-- Círculos decorativos con nuevos colores -->
+    <!-- Esquina superior izquierda - Círculo primario (verde oscuro) -->
+
+    <Button
+        android:id="@+id/btnVolver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="0dp"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/quicksand"
+        android:text="Volver"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <View
+        android:id="@+id/circleTopLeft1"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="-30dp"
+        android:layout_marginTop="-30dp"
+        android:background="@drawable/circle_decor_primary"
+        android:backgroundTint="#2c4741" />
+
+    <!-- Círculo secundario (verde claro) -->
+    <View
+        android:id="@+id/circleTopLeft2"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="-50dp"
+        android:background="@drawable/circle_decor_secondary"
+        android:backgroundTint="#587153" />
+
+    <!-- Esquina inferior derecha - Círculo primario -->
+    <View
+        android:id="@+id/circleBottomRight1"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="-20dp"
+        android:layout_marginEnd="-20dp"
+        android:background="@drawable/circle_decor_primary"
+        android:backgroundTint="#2c4741" />
+
+    <!-- Círculo secundario -->
+    <View
+        android:id="@+id/circleBottomRight2"
+        android:layout_width="228dp"
+        android:layout_height="222dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="47dp"
+        android:layout_marginBottom="-60dp"
+        android:background="@drawable/circle_decor_secondary"
+        android:backgroundTint="#587153" />
+
+    <!-- Título Registro con sombra para mejor legibilidad -->
+    <TextView
+        android:id="@+id/tvLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Registro de alarma"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/quicksand"
+        android:textColor="#000000"
+        android:shadowColor="#FFFFFF"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="180dp" />
+
+    <!-- Contenedor principal con ancho responsivo -->
+
+    <!-- Botón de Regresar con ancho responsivo -->
+
+    <RelativeLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvLogin"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="61dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/bg_rounded_right"
+        android:padding="24dp">
+
+        <!-- Campos de correo y contraseña -->
+        <LinearLayout
+            android:id="@+id/fieldsContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:orientation="vertical">
+
+            <!-- Campo de correo con icono verde -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/etHora"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/quicksand"
+                    android:hint="Hora (0-23)"
+                    android:inputType="number"
+                    android:maxLength="2"
+                    android:textColor="#000000"
+                    android:textColorHint="#757575"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- Campo de contraseña -->
+
+            <!-- Campo de confirmación de contraseña -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/etMinuto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/quicksand"
+                    android:hint="Minuto (0-59)"
+                    android:inputType="number"
+                    android:maxLength="2"
+                    android:textColor="#000000"
+                    android:textColorHint="#757575"
+                    android:textStyle="bold" /> <!-- Altura mínima consistente -->
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/etMensaje"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/quicksand"
+                    android:hint="Mensaje de la alarma"
+                    android:inputType="textCapSentences"
+                    android:textColor="#000000"
+                    android:textColorHint="#757575"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btnRegistro"
+        android:layout_width="wrap_content"
+        android:layout_height="63dp"
+        android:layout_below="@id/container"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="#88996A"
+        android:fontFamily="@font/quicksand"
+        android:text="Registrar Alarma"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp" />
+
+</RelativeLayout>

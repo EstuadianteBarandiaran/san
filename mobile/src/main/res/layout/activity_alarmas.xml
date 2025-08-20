@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F9F4"
+    android:padding="16dp"
+    android:id="@+id/main"
+    tools:context=".Alarmas">
+
+    <!-- Flecha de regreso -->
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="35dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_arrow_back"
+        android:tint="#2d3f46"
+        android:contentDescription="Regresar al perfil"
+        android:scaleType="centerInside" />
+
+    <!-- Título -->
+    <TextView
+        android:id="@+id/tvTitulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnBack"
+        android:text="Alarmas registradas"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:fontFamily="@font/quicksand"
+        android:textColor="#2d3f46"
+        android:gravity="center"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="24dp" />
+
+    <!-- RecyclerView -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tvTitulo"
+        android:orientation="vertical"
+        android:background="@drawable/rounded_bg"
+        android:padding="16dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvHistorial"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp"
+            android:clipToPadding="false"
+            android:scrollbars="vertical" />
+
+    </LinearLayout>
+
+    <!-- Botón de Reinicio de Alarmas -->
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fabReiniciar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_margin="24dp"
+        android:text="Reiniciar Alarmas"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="#FF6B6B"
+        android:fontFamily="@font/quicksand"
+        android:contentDescription="Reiniciar todas las alarmas" />
+
+    <!-- Botón de Agregar Alarma -->
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/fabAgregar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="24dp"
+        android:text="Agregar Alarma"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="#31462D"
+        android:fontFamily="@font/quicksand"
+        android:contentDescription="Agregar nueva alarma" />
+
+</RelativeLayout>

@@ -38,10 +38,7 @@
             </intent-filter>
         </service>
 
-        <!-- ✅ Receiver de alarmas (solo una vez) -->
-        <receiver
-            android:name=".alarm.AlarmReceiver"
-            android:exported="true" />
+ 
 
         <!-- Marca la app como independiente (standalone) -->
         <meta-data

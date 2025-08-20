@@ -20,5 +20,12 @@ interface ConfiguracionDao {
     @Query("SELECT * FROM configuraciones WHERE clave LIKE 'AlarmaEstado%' AND valor = 'true'")
     suspend fun obtenerAlarmasActivas(): List<Configuracion>
 
+    @Query("SELECT * FROM configuraciones ")
+    suspend fun obtenerAlarmas(): List<Configuracion>
+    // Agrega esto en ConfiguracionDao.kt
+    @Query("SELECT * FROM configuraciones WHERE clave = :clave LIMIT 1")
+    suspend fun obtenerConfiguracion(clave: String): Configuracion?
+    @Query("DELETE FROM configuraciones WHERE clave = :clave")
+    suspend fun eliminarPorClave(clave: String)
 
 }

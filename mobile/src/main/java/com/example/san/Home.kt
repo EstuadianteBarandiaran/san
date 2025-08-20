@@ -50,11 +50,7 @@ class Home : AppCompatActivity() {
         if (!isServiceRunning(WearDataService::class.java)) {
             WearDataService.startService(this@Home)
         }
-        // 🔥 Esto borra la base de datos actual
-        applicationContext.deleteDatabase("mi_base_datos")
 
-        // Esto fuerza a Room a recrearla y ejecutar el bloque onCreate
-        val dao = AppDatabase.getDatabase(applicationContext).configuracionDao()
         // Observar cambios en el usuario
         lifecycleScope.launchWhenStarted {
             authViewModel.currentUser.collect { user ->
@@ -63,11 +59,7 @@ class Home : AppCompatActivity() {
                 }
             }
         }
-        lifecycleScope.launch {
-            val dao = AppDatabase.getDatabase(applicationContext).configuracionDao()
-            val alarmas = extraerAlarmasProgramadas(dao)
-            AlarmScheduler.programarAlarmasConMensajes(applicationContext, alarmas)
-        }
+
 
 
 
