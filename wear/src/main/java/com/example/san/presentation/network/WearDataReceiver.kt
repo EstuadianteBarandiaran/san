@@ -8,7 +8,6 @@ import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import com.example.san.presentation.alarm.AlarmManagerHelper
 import com.google.android.gms.wearable.MessageEvent
 import com.google.android.gms.wearable.WearableListenerService
 import java.time.LocalTime
@@ -49,25 +48,7 @@ class WearDataReceiver : WearableListenerService() {
                 Log.d("WearDataReceiver", "⏰ Procesando alarmas")
                 mostrarNotificacionAlarma(data)
             }
-            "/sync_alarmas" -> {
-                Log.d("WearDataReceiver", "🔄 Sincronizando alarmas")
 
-                val partes = data.split("|")
-                val activasRaw = partes.getOrNull(0)?.removePrefix("ACTIVAS:") ?: ""
-                val canceladasRaw = partes.getOrNull(1)?.removePrefix("CANCELADAS:") ?: ""
-
-                val horas = activasRaw.split(",").filter { it.isNotBlank() }
-                val horasLocalTime = horas.mapNotNull {
-                    runCatching { LocalTime.parse(it) }.getOrNull()
-                }
-
-                val idsCanceladas = canceladasRaw.split(",").mapNotNull {
-                    runCatching { it.toInt() }.getOrNull()
-                }
-
-                AlarmManagerHelper.cancelarAlarmas(context = this, indices = idsCanceladas)
-                AlarmManagerHelper.programarAlarmas(context = this, horas = horasLocalTime)
-            }
             else -> {
                 Log.w("WearDataReceiver", "❓ Ruta desconocida: $path")
             }

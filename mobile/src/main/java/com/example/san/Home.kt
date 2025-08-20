@@ -15,12 +15,16 @@ import com.example.san.network.WearDataService
 import com.example.san.viewmodel.AuthViewModel
 import kotlinx.coroutines.launch
 import android.widget.LinearLayout
-import com.example.san.sync.sincronizarAlarmasConReloj
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.example.san.dao.extraerAlarmasProgramadas
+import com.example.san.database.AppDatabase
+import com.example.san.model.Configuracion
+import com.example.san.sync.AlarmScheduler
+
 
 
 class Home : AppCompatActivity() {
@@ -46,7 +50,11 @@ class Home : AppCompatActivity() {
         if (!isServiceRunning(WearDataService::class.java)) {
             WearDataService.startService(this@Home)
         }
+        // 🔥 Esto borra la base de datos actual
+        applicationContext.deleteDatabase("mi_base_datos")
 
+        // Esto fuerza a Room a recrearla y ejecutar el bloque onCreate
+        val dao = AppDatabase.getDatabase(applicationContext).configuracionDao()
         // Observar cambios en el usuario
         lifecycleScope.launchWhenStarted {
             authViewModel.currentUser.collect { user ->
@@ -55,6 +63,16 @@ class Home : AppCompatActivity() {
                 }
             }
         }
+        lifecycleScope.launch {
+            val dao = AppDatabase.getDatabase(applicationContext).configuracionDao()
+            val alarmas = extraerAlarmasProgramadas(dao)
+            AlarmScheduler.programarAlarmasConMensajes(applicationContext, alarmas)
+        }
+
+
+
+
+
     }
 
     private fun setupRecetasRecyclerView() {

@@ -16,4 +16,9 @@ interface ConfiguracionDao {
 
     @Query("DELETE FROM configuraciones")
     suspend fun eliminarTodo()
+
+    @Query("SELECT * FROM configuraciones WHERE clave LIKE 'AlarmaEstado%' AND valor = 'true'")
+    suspend fun obtenerAlarmasActivas(): List<Configuracion>
+
+
 }

@@ -32,25 +32,30 @@ abstract class AppDatabase : RoomDatabase() {
                             super.onCreate(db)
                             CoroutineScope(Dispatchers.IO).launch {
                                 val dao = getDatabase(context).configuracionDao()
-                                dao.insertar(Configuracion(clave="AlarmaHora1", valor="08"))
-                                dao.insertar(Configuracion(clave="AlarmaMinutos1", valor="17"))
+                                dao.insertar(Configuracion(clave="AlarmaHora1", valor="1"))
+                                dao.insertar(Configuracion(clave="AlarmaMinutos1", valor="43"))
                                 dao.insertar(Configuracion(clave="AlarmaEstado1", valor="true"))
+                                dao.insertar(Configuracion(clave="AlarmaMensaje1", valor="Recuerda es tu Desayuno"))
 
-                                dao.insertar(Configuracion(clave="AlarmaHora2", valor="08"))
-                                dao.insertar(Configuracion(clave="AlarmaMinutos2", valor="20"))
+                                dao.insertar(Configuracion(clave="AlarmaHora2", valor="1"))
+                                dao.insertar(Configuracion(clave="AlarmaMinutos2", valor="44"))
                                 dao.insertar(Configuracion(clave="AlarmaEstado2", valor="true"))
+                                dao.insertar(Configuracion(clave="AlarmaMensaje2", valor="Recuerda es tu almuerzo"))
 
-                                dao.insertar(Configuracion(clave="AlarmaHora3", valor="08"))
-                                dao.insertar(Configuracion(clave="AlarmaMinutos3", valor="23"))
+                                dao.insertar(Configuracion(clave="AlarmaHora3", valor="1"))
+                                dao.insertar(Configuracion(clave="AlarmaMinutos3", valor="45"))
                                 dao.insertar(Configuracion(clave="AlarmaEstado3", valor="true"))
+                                dao.insertar(Configuracion(clave="AlarmaMensaje3", valor="Recuerda es tu Comida"))
 
-                                dao.insertar(Configuracion(clave="AlarmaHora4", valor="17"))
-                                dao.insertar(Configuracion(clave="AlarmaMinutos4", valor="0"))
+                                dao.insertar(Configuracion(clave="AlarmaHora4", valor="1"))
+                                dao.insertar(Configuracion(clave="AlarmaMinutos4", valor="46"))
                                 dao.insertar(Configuracion(clave="AlarmaEstado4", valor="true"))
+                                dao.insertar(Configuracion(clave="AlarmaMensaje4", valor="Recuerda es tu 2do Almuerzo"))
 
-                                dao.insertar(Configuracion(clave="AlarmaHora5", valor="20"))
-                                dao.insertar(Configuracion(clave="AlarmaMinutos5", valor="0"))
+                                dao.insertar(Configuracion(clave="AlarmaHora5", valor="1"))
+                                dao.insertar(Configuracion(clave="AlarmaMinutos5", valor="47"))
                                 dao.insertar(Configuracion(clave="AlarmaEstado5", valor="true"))
+                                dao.insertar(Configuracion(clave="AlarmaMensaje5", valor="Recuerda es tu Cena"))
 
 
                             }
