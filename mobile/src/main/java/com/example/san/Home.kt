@@ -22,6 +22,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 
+
 class Home : AppCompatActivity() {
     private val authViewModel: AuthViewModel by viewModels()
     private lateinit var recetasRecyclerView: RecyclerView
@@ -31,6 +32,9 @@ class Home : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_home)
+
+        //inicializar el RecyclerView
+        recetasRecyclerView = findViewById(R.id.recetasRecyclerView)
 
         // Configurar el RecyclerView para las recetas
         setupRecetasRecyclerView()
