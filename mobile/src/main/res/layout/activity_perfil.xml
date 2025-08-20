@@ -1,72 +1,406 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="#F5F9F4"
     android:padding="16dp"
     tools:context=".Perfil">
 
-    <TextView
-        android:id="@+id/tvNombre"
+    <!-- Contenedor para el botón de cerrar sesión con texto -->
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        tools:text="Nombre: Juan Pérez" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="8dp"
+        android:orientation="vertical"
+        android:gravity="center">
 
-    <TextView
-        android:id="@+id/tvEdad"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        tools:text="Edad: 30 años" />
+        <!-- Botón de cerrar sesión (icono) -->
+        <ImageButton
+            android:id="@+id/btnLogOut"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="Cerrar sesión"
+            android:layout_marginTop="25dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_logout" />
 
-    <TextView
-        android:id="@+id/tvEstatura"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        tools:text="Estatura: 1.75 m" />
+        <!-- Texto "Cerrar sesión" -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cerrar sesión"
+            android:textColor="#2d3f46"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/quicksand"
+            android:layout_marginTop="4dp"/>
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/tvPeso"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        tools:text="Peso: 70 kg" />
-
-    <TextView
-        android:id="@+id/tvIMC"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        tools:text="IMC: 22.86" />
-
-    <TextView
-        android:id="@+id/tvComida"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        tools:text="Comida diaria: 2000 kcal" />
-
-    <TextView
-        android:id="@+id/tvAgua"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        tools:text="Agua diaria: 2.5 L" />
-    <Button
-        android:id="@+id/btnCaloria"
+    <!-- Contenedor principal para centrar el contenido -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Historial de calorias"/>
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:padding="24dp">
 
-    <Button
-        android:id="@+id/btnLogOut"
+        <!-- Icono de perfil -->
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="24dp"
+            android:src="@drawable/ic_profile"
+            android:tint="#b0c2a2" />
+
+        <!-- Contenedor de datos del perfil -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/rounded_bg"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <TextView
+                android:id="@+id/tvNombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="#ffffff"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/quicksand"
+                tools:text="Juan Pérez" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="16dp"
+                android:background="#213b33" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="start"
+                    android:text="Edad:"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/quicksand"
+                    android:textColor="#ffffff"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tvEdad"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/quicksand"
+                    android:textSize="16sp"
+                    tools:text="30 años" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="start"
+                    android:text="Estatura:"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/quicksand"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tvEstatura"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/quicksand"
+                    android:textColor="#ffffff"
+                    android:textSize="16sp"
+                    tools:text="1.75 m" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="start"
+                    android:text="Peso:"
+                    android:textColor="#ffffff"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/quicksand"/>
+
+                <TextView
+                    android:id="@+id/tvPeso"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/quicksand"
+                    android:textColor="#ffffff"
+                    android:textSize="16sp"
+                    tools:text="70 kg" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="start"
+                    android:text="IMC:"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/quicksand"
+                    android:textColor="#ffffff"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tvIMC"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/quicksand"
+                    android:textSize="16sp"
+                    tools:text="22.86" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="start"
+                    android:text="Calorías diarias:"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/quicksand"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tvComida"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/quicksand"
+                    android:textSize="16sp"
+                    tools:text="2000 kcal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="start"
+                    android:text="Agua diaria:"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/quicksand"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tvAgua"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:textColor="#ffffff"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/quicksand"
+                    tools:text="2.5 L" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Botón de historial de calorías -->
+        <Button
+            android:id="@+id/btnCaloria"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="#738e7d"
+            android:text="Historial de calorías"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:fontFamily="@font/quicksand"
+            android:textColor="#ffffff"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <!-- Barra de Navegación Inferior -->
+    <LinearLayout
+        android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Cerrar sesión" />
-</LinearLayout>
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bg_nav_bar"
+        android:orientation="horizontal"
+        android:paddingTop="12dp"
+        android:paddingBottom="16dp"
+        android:elevation="8dp">
+
+        <!-- Botón Inicio -->
+        <LinearLayout
+            android:id="@+id/homeButton"
+            android:layout_width="0dp"
+            android:layout_height="72dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless">
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/ic_home"
+                android:tint="#FFFFFF"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Inicio"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:fontFamily="@font/quicksand"
+                android:layout_marginTop="6dp"/>
+        </LinearLayout>
+
+        <!-- Botón Escáner -->
+        <LinearLayout
+            android:id="@+id/planButton"
+            android:layout_width="0dp"
+            android:layout_height="72dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless">
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/ic_camera"
+                android:tint="#FFFFFF"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Escaner"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:fontFamily="@font/quicksand"
+                android:layout_marginTop="6dp"/>
+        </LinearLayout>
+
+        <!-- Botón ChatBot -->
+        <LinearLayout
+            android:id="@+id/recipesButton"
+            android:layout_width="0dp"
+            android:layout_height="72dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless">
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/ic_chat"
+                android:tint="#FFFFFF"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ChatBot"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:fontFamily="@font/quicksand"
+                android:layout_marginTop="6dp"/>
+        </LinearLayout>
+
+        <!-- Botón Perfil (resaltado) -->
+        <LinearLayout
+            android:id="@+id/profileButton"
+            android:layout_width="0dp"
+            android:layout_height="72dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackgroundBorderless">
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/ic_profile"
+                android:tint="#b0c2a2"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Perfil"
+                android:textColor="#b0c2a2"
+                android:textSize="14sp"
+                android:fontFamily="@font/quicksand"
+                android:layout_marginTop="6dp"/>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

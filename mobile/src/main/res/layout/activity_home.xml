@@ -116,13 +116,13 @@
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:src="@drawable/ic_home"
-                android:tint="#FFFFFF"/>
+                android:tint="#b0c2a2"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Inicio"
-                android:textColor="#FFFFFF"
+                android:tint="#b0c2a2"
                 android:textSize="14sp"
                 android:fontFamily="@font/quicksand"
                 android:layout_marginTop="6dp"/>
